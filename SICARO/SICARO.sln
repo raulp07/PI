@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCF_SICARO", "WCF_SICARO\WCF_SICARO.csproj", "{BC942364-2108-4AC1-882B-43AE3D99FDAB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "REST", "REST", "{4B1E109A-A4C7-489B-8F3C-BD4D2A3E7F76}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WEB", "WEB", "{2EE8055F-828C-44A1-9C7B-DA7D59062764}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SICARO.WEB", "SICARO.WEB\SICARO.WEB.csproj", "{8534EB4B-EA09-457A-9316-FA689F201563}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SICARO.WEB.Tests", "SICARO.WEB.Tests\SICARO.WEB.Tests.csproj", "{7649EFD9-4239-4983-92CB-259274B2AD03}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC942364-2108-4AC1-882B-43AE3D99FDAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC942364-2108-4AC1-882B-43AE3D99FDAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC942364-2108-4AC1-882B-43AE3D99FDAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC942364-2108-4AC1-882B-43AE3D99FDAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8534EB4B-EA09-457A-9316-FA689F201563}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8534EB4B-EA09-457A-9316-FA689F201563}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8534EB4B-EA09-457A-9316-FA689F201563}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8534EB4B-EA09-457A-9316-FA689F201563}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7649EFD9-4239-4983-92CB-259274B2AD03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7649EFD9-4239-4983-92CB-259274B2AD03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7649EFD9-4239-4983-92CB-259274B2AD03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7649EFD9-4239-4983-92CB-259274B2AD03}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BC942364-2108-4AC1-882B-43AE3D99FDAB} = {4B1E109A-A4C7-489B-8F3C-BD4D2A3E7F76}
+		{8534EB4B-EA09-457A-9316-FA689F201563} = {2EE8055F-828C-44A1-9C7B-DA7D59062764}
+		{7649EFD9-4239-4983-92CB-259274B2AD03} = {2EE8055F-828C-44A1-9C7B-DA7D59062764}
+	EndGlobalSection
+EndGlobal

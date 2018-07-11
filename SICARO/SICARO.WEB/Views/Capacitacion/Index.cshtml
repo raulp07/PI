@@ -1,0 +1,168 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div id="app">
+
+    <div id="CAPACITACION">
+        <div class="col-sm-12">
+            <h1 class="text-center">Menu Capacitación</h1>
+
+        </div>
+        <div class="col-lg-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>Código</td>
+                        <td>Tema</td>
+                        <td>F. de Capacitación</td>
+                        <td>Estado</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="lista in Lista_Capacitacion">
+                        <td>{{ lista.vCodCapacitacion }}</td>
+                        <td>{{ lista.vTemaCapacitacion }}</td>
+                        <td>{{ lista.dFechaPropuestaCapacitacion}}</td>
+                        <td>{{ lista.iEstadoCapactiacion }}</td>
+                        <td>
+                            <input type="button" value="Gestionar" v-on:click="GestionarCapacitacion(lista.iIdCapacitacion,lista.vCodCapacitacion,lista.vTemaCapacitacion)" class="btn btn-default" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <div id="GESTIONCAPACITACION" style="display:none">
+
+        <div class="row">
+            <h1 class="text-center">Getión de Capactiacion {{ vCodCapacitacion }}</h1>
+        </div>
+        <div class="row">
+            <label class="col-sm-4 control-label">Tema</label>
+            <label class="col-sm-8 control-label">{{ vTemaCapacitacion }}</label>
+        </div>
+        <div class="row">
+
+            <label for="fecha" class="col-sm-2 control-label">Fecha</label>
+            <div class="col-sm-4">
+                <input class="form-control" id="fecha" type="date" value="2017-06-01">
+            </div>
+
+
+            <label for="horarinicio" class="col-sm-2 control-label">Hora Inicio</label>
+            <div class="col-sm-4">
+                <input class="form-control" id="horarinicio" type="time">
+            </div>
+
+
+        </div>
+        <div class="row">
+            <label for="horartermino" class="col-sm-2 control-label">Hora Termino</label>
+            <div class="col-sm-4">
+                <input class="form-control" id="horartermino" type="time" value="2017-06-01">
+            </div>
+
+            <label for="tiempotest" class="col-sm-2 control-label">Tiempo Test</label>
+            <div class="col-sm-4">
+                <input class="form-control" id="tiempotest" type="text">
+            </div>
+        </div>
+        <div class="row">
+
+            <label class="col-sm-4">Expositor </label>
+            <div class="text-center col-sm-8">
+                <label class="radio-inline"><input type="radio" v-on:click="MostrarPersonal" name="optradio">Externo</label>
+                <label class="radio-inline"><input type="radio" name="optradio">Interno</label>
+            </div>
+
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-10 col-sm-offset-1 ">
+                <fieldset class="col-md-10">
+                    <legend class="scheduler-border">Expositor</legend>
+                    <div class="form-group">
+                        <label for="ExpNombre" class="col-sm-4 control-label">Nombre</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="ExpNombre" type="text">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ExpoApePat" class="col-sm-4 control-label">Apellido Paterno</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="ExpoApePat" type="text">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ExpoApeMat" class="col-sm-4 control-label">Apellido Materno</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="ExpoApeMat" type="text">
+                        </div>
+                    </div>
+
+                    <div class="form-group hide">
+                        <label for="ExpoEmpresa" class="col-sm-4 control-label">Empresa</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="ExpoEmpresa" type="text">
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+        </div>
+
+    </div>
+    <div class="modal fade" id="ModalPersonal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <td>Nombre</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="lista in Lista_Personal">
+                                <td>{{lista.vCodPersonal}}</td>
+                                <td>{{ lista.vNombrePersonal }} {{lista.vApellidoPaternoPersonal}} {{lista.vApellidoMaternoPersonal}}</td>
+                                <td><label class="radio-inline"><input type="radio" v-on:click="ExpositorSeleccionado(lista.vCodPersonal)" name="optradio"></label></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" v-on:click="AceptarExpositor">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="~/Scripts/JsCapacitacion/Capacitacion.js"></script>
+
