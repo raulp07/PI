@@ -120,17 +120,20 @@
             </div>
 
         </div>
-
-        <div class="row">
-
+        <br />
+        <div class="row text-center">
+            <button type="button" class="btn btn-primary" v-on:click="PrepararTest">Preparar Test</button>
+            <button type="button" class="btn btn-primary" v-on:click="VerTest">Ver Test</button>
+            <button type="button" class="btn btn-primary" v-on:click="AgregarOperarios">Agregar Operarios</button>
+            <button type="button" class="btn btn-primary" v-on:click="VerOperarios">Ver Operarios</button>
         </div>
 
     </div>
-    <div class="modal fade" id="ModalPersonal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade" id="ModalPersonal">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Lista Personal</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -159,6 +162,135 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div id="ModalTest" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Some text in the modal.</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="Enunciadotest">Enunciado:</label>
+                            <textarea class="form-control" rows="5" id="Enunciadotest"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="valortest">Valor %:</label>
+                            <input id="valortest" type="number" max="100" min="0" step="10" />
+                        </div>
+
+                    </div>
+                    <br />
+                    <div class="row">
+                        <label class="">Tipo Respuesta</label>
+                        <label class="radio-inline"><input type="radio" v-on:click="" name="optradio" value="1" checked>V/F</label>
+                        <label class="radio-inline"><input type="radio" v-on:click="" name="optradio" value="2">Opción</label>
+                    </div>
+                    <div id="tipoRespuestaVF" class="row ">
+                        <fieldset>
+                            <legend>V/F</legend>
+                            <div class="col-sm-6">
+                                <div class="radio">
+                                    <label><input type="radio" name="opRespuesta" value="1" checked>Verdadero</label>
+                                </div>
+                                <div class="radio">
+                                    <label><input type="radio" name="opRespuesta" value="0">Falso</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <button type="button" class="btn btn-secondary col-md-8 col-md-offset-2" id="GrabarOpcionVF">Grabar</button>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div id="tipoRespuestaOpciones" class="row hide">
+                        <fieldset>
+                            <legend>Opciones</legend>
+                            <div class="container">
+                                <div class="row">
+                                    <label>Respuesta :</label>
+                                    <input class="form-control" id="ResTextOpcion" type="text">
+                                </div>
+                                <div class="row">
+                                    <div class="checkbox col-md-6">
+                                        <label><input type="checkbox" value="" id="chkEstadoCorrecto">Estado correcto</label>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-secondary col-md-8 col-md-offset-2" v-on:click="AgregarRespuesta" id="GrabarOpcion">Agregar</button>
+                                    </div>
+
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <td>Respuesta</td>
+                                                <td>Estado</td>
+                                                <td></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="lista in OpcionesRespuesta">
+                                                <td>{{ lista.Respuesta }}</td>
+                                                <td>{{ lista.estado }}</td>
+                                                <td>
+                                                    <input type="button" value="X" v-on:click="QuitarOpcion(lista.Respuesta)" class="btn btn-default" />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>                                    
+                                </div>
+                                
+                            </div>
+                            
+                        </fieldset>
+                    </div>
+                    <div class="row">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-secondary" id="btnAgregarPregunta" v-on:click="AgregarPregunta()">Agregar Pregunta</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-secondary" id="btnCancelarPregunta" v-on:click="CancelarPregunta()">Cancelar</button>
+                            </div>
+                        </div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <td>Pregunta</td>
+                                    <td>Tipo</td>
+                                    <td>Valor</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="lista in Lista_Preguntas">
+                                    <td>{{ lista.Enunciadotest }}</td>
+                                    <td>{{ lista.valortest }}</td>
+                                    <td>{{ lista.optradio }}</td>
+                                    <td>
+                                        <input type="button" value="Quitar" v-on:click="QuitarPregunta(lista.codpregunta)" class="btn btn-default" />
+                                        <input type="button" value="Editar" v-on:click="EditarPeqgunta(lista.codpregunta)" class="btn btn-default" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </div>
 
 
