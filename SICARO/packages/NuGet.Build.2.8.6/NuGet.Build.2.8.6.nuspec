@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>NuGet.Build</id>
+    <version>2.8.6</version>
+    <title>NuGet.Build</title>
+    <authors>.NET Foundation</authors>
+    <owners>.NET Foundation</owners>
+    <licenseUrl>http://www.microsoft.com/web/webpi/eula/nuget_release_eula.htm</licenseUrl>
+    <projectUrl>https://github.com/NuGet/NuGet2</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>MSBuild targets for nuget package restore and package build.</description>
+    <summary />
+    <copyright>© .NET Foundation. All rights reserved.</copyright>
+    <dependencies>
+      <dependency id="NuGet.CommandLine" version="(, )" />
+    </dependencies>
+  </metadata>
+</package>

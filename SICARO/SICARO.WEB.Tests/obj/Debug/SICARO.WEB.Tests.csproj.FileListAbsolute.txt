@@ -69,3 +69,4 @@ C:\Users\raul\Documents\Visual Studio 2015\Projects\SICARO\SICARO.WEB.Tests\bin\
 C:\Users\raul\Documents\Visual Studio 2015\Projects\SICARO\SICARO.WEB.Tests\obj\Debug\SICARO.WEB.Tests.csprojResolveAssemblyReference.cache
 C:\Users\raul\Documents\Visual Studio 2015\Projects\SICARO\SICARO.WEB.Tests\obj\Debug\SICARO.WEB.Tests.dll
 C:\Users\raul\Documents\Visual Studio 2015\Projects\SICARO\SICARO.WEB.Tests\obj\Debug\SICARO.WEB.Tests.pdb
+D:\GitHubRepositorio\RepositorioPIA2\SICARO\SICARO.WEB.Tests\obj\Debug\SICARO.WEB.Tests.csprojResolveAssemblyReference.cache

@@ -24,6 +24,14 @@ namespace WCF_SICARO.Persistencia
             }
         }
 
+
+        private static string objeti;
+        private static string objeto2;
+        private static string objeto3;
+        private static string objeto4;
+        private static string objeto5;
+
+
         public List<CAPACITACION_EL> GetAllCAPACITACION(CAPACITACION_EL C)
         {
             using (SqlConnection con = new SqlConnection(ConexionUtil.Cadena))

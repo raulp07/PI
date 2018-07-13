@@ -17,3 +17,22 @@ C:\Users\raul\Documents\Visual Studio 2015\Projects\SICARO\WCF_SICARO\bin\Micros
 C:\Users\raul\Documents\Visual Studio 2015\Projects\SICARO\WCF_SICARO\obj\Debug\WCF_SICARO.csprojResolveAssemblyReference.cache
 C:\Users\raul\Documents\Visual Studio 2015\Projects\SICARO\WCF_SICARO\obj\Debug\WCF_SICARO.dll
 C:\Users\raul\Documents\Visual Studio 2015\Projects\SICARO\WCF_SICARO\obj\Debug\WCF_SICARO.pdb
+D:\GitHubRepositorio\RepositorioPIA2\SICARO\WCF_SICARO\bin\ApplicationInsights.config
+D:\GitHubRepositorio\RepositorioPIA2\SICARO\WCF_SICARO\bin\WCF_SICARO.dll.config
+D:\GitHubRepositorio\RepositorioPIA2\SICARO\WCF_SICARO\bin\WCF_SICARO.dll
+D:\GitHubRepositorio\RepositorioPIA2\SICARO\WCF_SICARO\bin\WCF_SICARO.pdb
+D:\GitHubRepositorio\RepositorioPIA2\SICARO\WCF_SICARO\bin\Microsoft.AI.DependencyCollector.dll
+D:\GitHubRepositorio\RepositorioPIA2\SICARO\WCF_SICARO\bin\Microsoft.AI.PerfCounterCollector.dll
+D:\GitHubRepositorio\RepositorioPIA2\SICARO\WCF_SICARO\bin\Microsoft.AI.ServerTelemetryChannel.dll
+D:\GitHubRepositorio\RepositorioPIA2\SICARO\WCF_SICARO\bin\Microsoft.AI.Web.dll
+D:\GitHubRepositorio\RepositorioPIA2\SICARO\WCF_SICARO\bin\Microsoft.AI.WindowsServer.dll
+D:\GitHubRepositorio\RepositorioPIA2\SICARO\WCF_SICARO\bin\Microsoft.ApplicationInsights.dll
+D:\GitHubRepositorio\RepositorioPIA2\SICARO\WCF_SICARO\bin\Microsoft.AI.DependencyCollector.xml
+D:\GitHubRepositorio\RepositorioPIA2\SICARO\WCF_SICARO\bin\Microsoft.AI.ServerTelemetryChannel.xml
+D:\GitHubRepositorio\RepositorioPIA2\SICARO\WCF_SICARO\bin\Microsoft.AI.Web.xml
+D:\GitHubRepositorio\RepositorioPIA2\SICARO\WCF_SICARO\bin\Microsoft.AI.WindowsServer.xml
+D:\GitHubRepositorio\RepositorioPIA2\SICARO\WCF_SICARO\bin\Microsoft.ApplicationInsights.xml
+D:\GitHubRepositorio\RepositorioPIA2\SICARO\WCF_SICARO\obj\Debug\WCF_SICARO.csprojResolveAssemblyReference.cache
+D:\GitHubRepositorio\RepositorioPIA2\SICARO\WCF_SICARO\obj\Debug\WCF_SICARO.dll
+D:\GitHubRepositorio\RepositorioPIA2\SICARO\WCF_SICARO\obj\Debug\WCF_SICARO.pdb
+D:\GitHubRepositorio\RepositorioPIA2\SICARO\WCF_SICARO\bin\Microsoft.AI.Agent.Intercept.dll
