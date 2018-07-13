@@ -3,6 +3,7 @@
     data: {
         Lista_Capacitacion: [],
         Lista_Personal: [],
+        Lista_Operarios: [],
         Lista_Preguntas: [],
         OpcionesRespuesta: [],
         vCodCapacitacion: "",
@@ -10,12 +11,21 @@
         vCodPersonal: "",
         codPregunta: 1,
         EstadoActualizar: 0,
+        NotaMaxima: 20,
+        Estado_Almacenamiento_Preguntas: 0,
+        Estado_Almacenamiento_Operarios: 0,
     },
     methods: {
         ListaCapacitacion: function () {
 
             axios.post("/Capacitacion/ListaCapacitacion/").then(function (response) {
                 this.Lista_Capacitacion = response.data.ListaCAPACITACION;
+            }.bind(this)).catch(function (error) {
+            });
+        },
+        ListarPersonal: function () {
+            axios.post("/Capacitacion/ListaPersonal/").then(function (response) {
+                this.Lista_Personal = response.data.ListaPersonal;
             }.bind(this)).catch(function (error) {
             });
         },
@@ -30,13 +40,7 @@
         MostrarPersonal: function () {
             $("#ModalPersonal").modal('show');
         },
-        ListarPersonal: function () {
 
-            axios.post("/Capacitacion/ListaPersonal/").then(function (response) {
-                this.Lista_Personal = response.data.ListaPersonal;
-            }.bind(this)).catch(function (error) {
-            });
-        },
         ExpositorSeleccionado: function (vCodPersonal) {
             this.vCodPersonal = vCodPersonal;
         },
@@ -57,6 +61,22 @@
         VerTest: function () {
         },
         AgregarOperarios: function () {
+            debugger;
+            var _vCodPersonal = this.vCodPersonal;
+            if (this.vCodPersonal.length != 0) {
+                var _Lista_Personal = this.Lista_Personal;
+                _Lista_Personal = _Lista_Personal.filter(function (eval) {
+                    return eval.vCodPersonal != _vCodPersonal;
+                });
+                this.Lista_Operarios = _Lista_Personal;
+                debugger;
+            } else {
+                debugger;
+                this.Lista_Operarios = this.Lista_Personal;
+            }
+            debugger;
+            $("#ModalOperario").modal('show');
+            
         },
         VerOperarios: function () {
         },
@@ -111,14 +131,48 @@
         },
         AgregarPregunta: function () {
             if (this.EstadoActualizar == 0) {
-                var _Enunciadotest = $('#Enunciadotest').val();
-                var _valortest = $('#valortest').val();
-                var _optradio = $('input:radio[name=optradio]:checked').val();
+                var _Enunciadotest = $('#Enunciadotest').val().trim();
+                var _valortest_porcentaje = $('#valortest').val();
+                var _valortest = (this.NotaMaxima * _valortest_porcentaje) / 100;
 
+                if (_Enunciadotest.length == 0) {
+                    alert('El enunciado esta vacio, ingrese uno');
+                    return;
+                }
+                if (_valortest_porcentaje <= 0) {
+                    alert('El valor de esta pregunta no puede ser 0');
+                    return;
+                }
+
+                var _optradio = $('input:radio[name=optradio]:checked').val();
+                var _TipoRespuesta = $('input:radio[name=optradio]:checked').val() == 1 ? "V/F" : "Opción";
                 var _codPregunta = this.codPregunta;
                 var datos = this.Lista_Preguntas;
 
-                var lista = { "codpregunta": _codPregunta, "Enunciadotest": _Enunciadotest, "valortest": _valortest, "optradio": _optradio };
+
+
+
+                var _Validar = datos.find(function (val) {
+                    return val.Enunciadotest == _Enunciadotest;
+                });
+                if (_Validar != undefined) {
+                    alert('Ya existe una respuesta igual');
+                    return;
+                };
+                var sumatoria_puntos = 0;
+                $.each(datos, function (key, val) {
+                    sumatoria_puntos = sumatoria_puntos + parseInt(val.valortestPorcentaje);
+                });
+                if (sumatoria_puntos == 100) {
+                    alert('La suma del valor de las preguntas ya alcanzaron el puntaje maximo');
+                    return;
+                };
+                if ((sumatoria_puntos + parseInt(_valortest_porcentaje)) > 100) {
+                    alert('La suma del valor de las preguntas sobrevasa el puntaje maximo se recomienda un valor de ' + (100 - sumatoria_puntos));
+                    return;
+                };
+
+                var lista = { "codpregunta": _codPregunta, "Enunciadotest": _Enunciadotest, "TipoRespuesta": _TipoRespuesta, "optradio": _optradio, "valortestPorcentaje": _valortest_porcentaje, "valortest": _valortest };
                 datos.push(lista);
 
                 this.GrabarOpcionVF();
@@ -139,12 +193,24 @@
                         val.optradio = _optradio;
                     }
                 });
-                this.EstadoActualizar = 0;
-
             }
+            this.LimpiarFormulario();
 
         },
         QuitarPregunta: function (codpregunta) {
+            var _Lista_Preguntas = this.Lista_Preguntas;
+            var _OpcionesRespuesta = this.OpcionesRespuesta;
+
+            _Lista_Preguntas = _Lista_Preguntas.filter(function (val) {
+                return val.codpregunta != codpregunta;
+            });
+            _OpcionesRespuesta = _OpcionesRespuesta.filter(function (val) {
+                return val.codpregunta != codpregunta;
+            });
+            this.Lista_Preguntas = _Lista_Preguntas;
+            this.OpcionesRespuesta = _OpcionesRespuesta;
+
+
 
         },
         EditarPeqgunta: function (codpregunta) {
@@ -165,19 +231,44 @@
             $('input:radio[name=opRespuesta][value=' + _ListaO.estadovalor + ']').prop('checked', true);
 
             $('#btnAgregarPregunta').text('Actualizar Pregunta');
+            $('#btnCancelarPregunta').removeClass('hide');
             this.EstadoActualizar = _ListaP.codpregunta;
 
         },
         CancelarPregunta: function () {
-            $('#Enunciadotest').empty();
+            this.LimpiarFormulario();
+        },
+        LimpiarFormulario: function () {
+            $('#Enunciadotest').val('');
             $('#valortest').val(0);
             this.EstadoActualizar = 0;
-        }
+            $('#btnCancelarPregunta').addClass('hide');
+            $('#btnAgregarPregunta').text('Agregar Pregunta');
+        },
+        GrabarPreguntas: function () {
+            this.Estado_Almacenamiento_Preguntas = 1;
+        },
+        CancelarPreguntas: function () {
+            $("#ModalTest").modal('hide');
+            this.Estado_Almacenamiento_Preguntas = 0;
+        },
+        GrabarOperarios: function () {
+            this.Estado_Almacenamiento_Operarios = 1;
+        },
+        CancelarOperarios: function () {
+            this.Estado_Almacenamiento_Operarios = 0;
+            $("#ModalOperario").modal('hide');
+        },
+        GrabarCapacitacion: function () {
+
+        },
+        CancelarCapacitacion: function () {
+
+        },
     },
     computed: {},
     created: function () {
         this.ListaCapacitacion();
-
     },
     mounted: function () {
     }

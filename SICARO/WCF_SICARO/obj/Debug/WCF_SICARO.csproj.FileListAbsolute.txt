@@ -17,3 +17,22 @@ C:\Users\raul\Documents\Visual Studio 2015\Projects\SICARO\WCF_SICARO\bin\Micros
 C:\Users\raul\Documents\Visual Studio 2015\Projects\SICARO\WCF_SICARO\obj\Debug\WCF_SICARO.csprojResolveAssemblyReference.cache
 C:\Users\raul\Documents\Visual Studio 2015\Projects\SICARO\WCF_SICARO\obj\Debug\WCF_SICARO.dll
 C:\Users\raul\Documents\Visual Studio 2015\Projects\SICARO\WCF_SICARO\obj\Debug\WCF_SICARO.pdb
+D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\bin\ApplicationInsights.config
+D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\bin\WCF_SICARO.dll.config
+D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\bin\WCF_SICARO.dll
+D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\bin\WCF_SICARO.pdb
+D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\bin\Microsoft.AI.Agent.Intercept.dll
+D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\bin\Microsoft.AI.DependencyCollector.dll
+D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\bin\Microsoft.AI.PerfCounterCollector.dll
+D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\bin\Microsoft.AI.ServerTelemetryChannel.dll
+D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\bin\Microsoft.AI.Web.dll
+D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\bin\Microsoft.AI.WindowsServer.dll
+D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\bin\Microsoft.ApplicationInsights.dll
+D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\bin\Microsoft.AI.DependencyCollector.xml
+D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\bin\Microsoft.AI.ServerTelemetryChannel.xml
+D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\bin\Microsoft.AI.Web.xml
+D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\bin\Microsoft.AI.WindowsServer.xml
+D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\bin\Microsoft.ApplicationInsights.xml
+D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\obj\Debug\WCF_SICARO.csprojResolveAssemblyReference.cache
+D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\obj\Debug\WCF_SICARO.dll
+D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\obj\Debug\WCF_SICARO.pdb
