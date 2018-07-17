@@ -51,7 +51,7 @@
 
             <label for="fecha" class="col-sm-2 control-label">Fecha</label>
             <div class="col-sm-4">
-                <input class="form-control" id="fecha" type="date" value="2017-06-01">
+                <input class="form-control" id="dfecha" type="date" value="2017-06-01">
             </div>
 
 
@@ -77,8 +77,8 @@
 
             <label class="col-sm-4">Expositor </label>
             <div class="text-center col-sm-8">
-                <label class="radio-inline"><input type="radio" v-on:click="MostrarPersonal" name="optradio">Externo</label>
-                <label class="radio-inline"><input type="radio" name="optradio">Interno</label>
+                <label class="radio-inline"><input type="radio" v-on:click="MostrarPersonal" name="optradio">Interno</label>
+                <label class="radio-inline"><input type="radio" name="optradio">Externo</label>
             </div>
         </div>
         <br />
@@ -165,7 +165,7 @@
                             <tr v-for="lista in Lista_Personal">
                                 <td>{{lista.vCodPersonal}}</td>
                                 <td>{{ lista.vNombrePersonal }} {{lista.vApellidoPaternoPersonal}} {{lista.vApellidoMaternoPersonal}}</td>
-                                <td><label class="radio-inline"><input type="radio" v-on:click="ExpositorSeleccionado(lista.vCodPersonal)" name="optradio"></label></td>
+                                <td><label class="radio-inline"><input type="radio" v-on:click="ExpositorSeleccionado(lista.vCodPersonal,lista.iIdPersonal)" name="optExpositor"></label></td>
                             </tr>
                         </tbody>
                     </table>
@@ -195,15 +195,15 @@
                         </div>
                         <div class="col-md-2">
                             <label for="valortest">Valor %:</label>
-                            <input id="valortest" class="form-control" type="number" max="100" min="0" step="10" value="20"/>
+                            <input id="valortest" class="form-control" type="number" max="100" min="0" step="10" value="20" />
                         </div>
 
                     </div>
                     <br />
                     <div class="row">
                         <label class="">Tipo Respuesta</label>
-                        <label class="radio-inline"><input type="radio" v-on:click="" name="optradio" value="1" checked>V/F</label>
-                        <label class="radio-inline"><input type="radio" v-on:click="" name="optradio" value="2">Opción</label>
+                        <label class="radio-inline"><input type="radio" v-on:click="" name="optRespuesta" value="1" checked>V/F</label>
+                        <label class="radio-inline"><input type="radio" v-on:click="" name="optRespuesta" value="2">Opción</label>
                     </div>
                     <div id="tipoRespuestaVF" class="row ">
                         <fieldset>
@@ -255,11 +255,11 @@
                                                 </td>
                                             </tr>
                                         </tbody>
-                                    </table>                                    
+                                    </table>
                                 </div>
-                                
+
                             </div>
-                            
+
                         </fieldset>
                     </div>
                     <br />
@@ -277,7 +277,7 @@
                             <thead>
                                 <tr class="col-sm-12">
                                     <td class="col-sm-5">Pregunta</td>
-                                    <td  class="col-sm-1">Tipo</td>
+                                    <td class="col-sm-1">Tipo</td>
                                     <td class="col-sm-1">Valor</td>
                                     <td class="col-sm-1">%</td>
                                     <td class="col-sm-4"></td>
@@ -300,12 +300,12 @@
                 </div>
                 <div class="modal-footer">
                     <div class="col-sm-4 col-sm-offset-1">
-                        <button type="button" class="btn btn-default" v-on:click="CancelarPreguntas()">Cancelar</button>    
+                        <button type="button" class="btn btn-default" v-on:click="CancelarPreguntas()">Cancelar</button>
                     </div>
                     <div class="col-sm-4 col-sm-offset-1">
-                        <button type="button" class="btn btn-primary" v-on:click="GrabarPreguntas()" >Gabar</button>
-                    </div>                    
-                    
+                        <button type="button" class="btn btn-primary" v-on:click="GrabarPreguntas()">Gabar</button>
+                    </div>
+
                 </div>
             </div>
 

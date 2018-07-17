@@ -33,6 +33,6 @@ D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\bin\Microsoft.AI.ServerTelemetryChannel
 D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\bin\Microsoft.AI.Web.xml
 D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\bin\Microsoft.AI.WindowsServer.xml
 D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\bin\Microsoft.ApplicationInsights.xml
-D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\obj\Debug\WCF_SICARO.csprojResolveAssemblyReference.cache
 D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\obj\Debug\WCF_SICARO.dll
 D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\obj\Debug\WCF_SICARO.pdb
+D:\UPC\X\PI2\FuentesPI\SICARO\WCF_SICARO\obj\Debug\WCF_SICARO.csprojResolveAssemblyReference.cache

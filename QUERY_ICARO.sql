@@ -75,7 +75,7 @@ CREATE TABLE GESTION_CAPACITACION
 (
 iIdGestionCapacitacion int primary key identity,
 iIdCapacitacion int FOREIGN KEY references CAPACITACION(iIdCapacitacion),
-iIdRepresentante int FOREIGN KEY references REPRESENTANTE(iIdRepresentante),
+iIdRepresentante int,
 dFechaRealizacionCapacitacion date,
 tHoraInicio time,
 tHoraFin time,

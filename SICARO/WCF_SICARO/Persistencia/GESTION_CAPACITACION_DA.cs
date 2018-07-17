@@ -79,8 +79,8 @@ namespace WCF_SICARO.Persistencia
                     com.Parameters.Add("@iIdCapacitacion", SqlDbType.Int).Value = GC.iIdCapacitacion;
                     com.Parameters.Add("@iIdRepresentante", SqlDbType.Int).Value = GC.iIdRepresentante;
                     com.Parameters.Add("@dFechaRealizacionCapacitacion", SqlDbType.Date).Value = GC.dFechaRealizacionCapacitacion;
-                    com.Parameters.Add("@tHoraInicio", SqlDbType.Time).Value = GC.tHoraInicio;
-                    com.Parameters.Add("@tHoraFin", SqlDbType.Time).Value = GC.tHoraFin;
+                    com.Parameters.Add("@tHoraInicio", SqlDbType.Time).Value = "05:30";//GC.tHoraInicio.ToSho;
+                    com.Parameters.Add("@tHoraFin", SqlDbType.Time).Value = "05:30"; //GC.tHoraFin.ToShortTimeString();
                     com.Parameters.Add("@iTiempoTest", SqlDbType.Int).Value = GC.iTiempoTest;
                     com.Parameters.Add("@iUsuarioCrea", SqlDbType.Int).Value = GC.iUsuarioCrea;
 
@@ -101,8 +101,8 @@ namespace WCF_SICARO.Persistencia
                     com.Parameters.Add("@iIdCapacitacion", SqlDbType.Int).Value = GC.iIdCapacitacion;
                     com.Parameters.Add("@iIdRepresentante", SqlDbType.Int).Value = GC.iIdRepresentante;
                     com.Parameters.Add("@dFechaRealizacionCapacitacion", SqlDbType.Date).Value = GC.dFechaRealizacionCapacitacion;
-                    com.Parameters.Add("@tHoraInicio", SqlDbType.Time).Value = GC.tHoraInicio;
-                    com.Parameters.Add("@tHoraFin", SqlDbType.Time).Value = GC.tHoraFin;
+                    com.Parameters.Add("@tHoraInicio", SqlDbType.Time).Value = GC.tHoraInicio.ToShortTimeString();
+                    com.Parameters.Add("@tHoraFin", SqlDbType.Time).Value = GC.tHoraFin.ToShortTimeString();
                     com.Parameters.Add("@iTiempoTest", SqlDbType.Int).Value = GC.iTiempoTest;
                     com.Parameters.Add("@iUsuarioMod", SqlDbType.Int).Value = GC.iUsuarioCrea;
 

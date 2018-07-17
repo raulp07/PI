@@ -9,6 +9,7 @@
         vCodCapacitacion: "",
         vTemaCapacitacion: "",
         vCodPersonal: "",
+        iIdPersonal:0,
         codPregunta: 1,
         EstadoActualizar: 0,
         NotaMaxima: 20,
@@ -41,10 +42,12 @@
             $("#ModalPersonal").modal('show');
         },
 
-        ExpositorSeleccionado: function (vCodPersonal) {
+        ExpositorSeleccionado: function (vCodPersonal, iIdPersonal) {
             this.vCodPersonal = vCodPersonal;
+            this.iIdPersonal = iIdPersonal;
         },
         AceptarExpositor: function () {
+            
             var _Lista_Personal = this.Lista_Personal;
             var _vCodPersonal = this.vCodPersonal;
             var _lista = _Lista_Personal.find(function (val) {
@@ -61,7 +64,6 @@
         VerTest: function () {
         },
         AgregarOperarios: function () {
-            debugger;
             var _vCodPersonal = this.vCodPersonal;
             if (this.vCodPersonal.length != 0) {
                 var _Lista_Personal = this.Lista_Personal;
@@ -69,14 +71,11 @@
                     return eval.vCodPersonal != _vCodPersonal;
                 });
                 this.Lista_Operarios = _Lista_Personal;
-                debugger;
             } else {
-                debugger;
                 this.Lista_Operarios = this.Lista_Personal;
             }
-            debugger;
             $("#ModalOperario").modal('show');
-            
+
         },
         VerOperarios: function () {
         },
@@ -86,6 +85,7 @@
             var _chkEstadoCorrecto = "";
             var _estadovalor = $('input:radio[name=opRespuesta]:checked').val();
             var _codPregunta = this.codPregunta;
+
             if (this.EstadoActualizar == 0) {
                 var list = { "codpregunta": _codPregunta, "Respuesta": _ResTextOpcion, "estado": _chkEstadoCorrecto, "estadovalor": _estadovalor };
                 datos.push(list);
@@ -117,7 +117,6 @@
                 alert('Ya existe una respuesta igual');
                 return;
             }
-
             var list = { "codpregunta": _codPregunta, "Respuesta": _ResTextOpcion, "estado": _chkEstadoCorrecto, "estadovalor": _estadovalor };
             datos.push(list);
             this.OpcionesRespuesta = datos;
@@ -144,8 +143,9 @@
                     return;
                 }
 
-                var _optradio = $('input:radio[name=optradio]:checked').val();
-                var _TipoRespuesta = $('input:radio[name=optradio]:checked').val() == 1 ? "V/F" : "Opción";
+                var _optradio = $('input:radio[name=optRespuesta]:checked').val();
+                var _TipoRespuesta = $('input:radio[name=optRespuesta]:checked').val() == 1 ? "V/F" : "Opción";
+
                 var _codPregunta = this.codPregunta;
                 var datos = this.Lista_Preguntas;
 
@@ -176,7 +176,7 @@
                 datos.push(lista);
 
                 this.GrabarOpcionVF();
-                this.codPregunta = this.codPregunta + 1;
+                this.codPregunta = _codPregunta + 1;
                 this.Lista_Preguntas = datos;
             } else {
 
@@ -246,7 +246,10 @@
             $('#btnAgregarPregunta').text('Agregar Pregunta');
         },
         GrabarPreguntas: function () {
+            this.ValidarCantidadPreguntas();
+
             this.Estado_Almacenamiento_Preguntas = 1;
+            $("#ModalTest").modal('hide');
         },
         CancelarPreguntas: function () {
             $("#ModalTest").modal('hide');
@@ -254,6 +257,7 @@
         },
         GrabarOperarios: function () {
             this.Estado_Almacenamiento_Operarios = 1;
+            $("#ModalOperario").modal('hide');
         },
         CancelarOperarios: function () {
             this.Estado_Almacenamiento_Operarios = 0;
@@ -261,9 +265,61 @@
         },
         GrabarCapacitacion: function () {
 
+            this.ValidarCantidadPreguntas();
+
+
+            var GestionCapacitacion = {
+                'iIdCapacitacion': this.iIdCapacitacion,
+                'iIdRepresentante': this.iIdPersonal,
+                'dFechaRealizacionCapacitacion': $('#dfecha').val(),
+                'tHoraInicio': $('#horarinicio').val(),
+                'tHoraFin': $('#horartermino').val(),
+                'iTiempoTest': $('#tiempotest').val()
+            }
+            
+            var _Lista_Preguntas = this.Lista_Preguntas;
+            var _Preguntas = [];
+            $.each(_Lista_Preguntas, function (key, val) {
+                var dato = {
+                    "iIdPregunta": parseInt(val.codpregunta),
+                    "vEnunciadoPregunta": val.Enunciadotest,
+                    "iPuntajePregunta":val.valortest,
+                    "iTipoRespuestaPregunta": val.optradio
+                };
+                _Preguntas.push(dato);
+            });
+            
+            var _OpcionesRespuesta = this.OpcionesRespuesta;
+            var _Respuestas = [];
+            $.each(_OpcionesRespuesta, function (key, val) {
+                var dato = {
+                    "iIdPregunta": parseInt(val.codpregunta),
+                    "vEnunciadoOpcion": val.Respuesta,
+                    "iEstadoOpcion": val.estadovalor
+                };
+                _Respuestas.push(dato);
+            });
+            var jsonData = { GestionCapacitacion: GestionCapacitacion, _Preguntas: _Preguntas, _Respuestas: _Respuestas };
+            axios.post("/Capacitacion/RegistrarCapacitacion/", jsonData).then(function (response) {
+                this.Lista_Capacitacion = response.data.ListaCAPACITACION;
+            }.bind(this)).catch(function (error) {
+            });
         },
         CancelarCapacitacion: function () {
 
+        },
+        ValidarCantidadPreguntas: function () {
+            var datos = this.Lista_Preguntas;
+            var sumatoria_puntos = 0;
+            $.each(datos, function (key, val) {
+                sumatoria_puntos = sumatoria_puntos + parseInt(val.valortestPorcentaje);
+            });
+            if (sumatoria_puntos < 100) {
+
+                alert('El valor de las preguntas debe llegar al 100%');
+                this.Estado_Almacenamiento_Preguntas = 0;
+                return;
+            };
         },
     },
     computed: {},

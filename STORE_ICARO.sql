@@ -57,6 +57,12 @@ VALUES (
 @iUsuarioCrea,
 GETDATE()
 )
+
+
+declare @iIdGestionCapacitacion int = @@IDENTITY
+
+EXECUTE [dbo].[spInsertTEST] @iIdGestionCapacitacion,'',@dFechaRealizacionCapacitacion,1,1
+
 END
 GO
 CREATE PROCEDURE [spUpdateGESTION_CAPACITACION]
@@ -281,12 +287,12 @@ CREATE PROCEDURE [spInsertPREGUNTA]
 @vEnunciadoPregunta varchar(max),
 @iPuntajePregunta int,
 @iTipoRespuestaPregunta int,
-@iUsuarioCrea int,
-@dFechaCrea datetime,
-@iUsuarioMod int,
-@dFechaMod datetime
+@iUsuarioCrea int
 AS
 BEGIN
+
+set @iIdTest = (select max(iIdTest) from TEST)
+
 INSERT INTO 
 PREGUNTA(
 iIdTest,
@@ -356,6 +362,9 @@ CREATE PROCEDURE [spInsertOPCION_PREGUNTA]
 @iUsuarioCrea int
 AS
 BEGIN
+
+set @iIdPregunta = (select max(iIdPregunta) from PREGUNTA)
+
 INSERT INTO 
 OPCION_PREGUNTA(
 iIdPregunta,

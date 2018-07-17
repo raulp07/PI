@@ -41,6 +41,34 @@ namespace SICARO.WEB.Controllers
             return Json(new { ListaPersonal= ListaPersonal ,JsonRequestBehavior.AllowGet});
         }
 
+        [HttpPost]
+        public JsonResult RegistrarCapacitacion(GESTION_CAPACITACION_EL GestionCapacitacion,List<PREGUNTA_EL> _Preguntas, List<OPCION_PREGUNTA_EL> _Respuestas)
+        {
+            string perosnalizaicon = "";
+            string postdata = js.Serialize(GestionCapacitacion);
+            int respuesta = js.Deserialize<int>(Utilitario.Accion.ConectREST("ICAPACITACION", "POST", postdata));
+
+            foreach (PREGUNTA_EL item in _Preguntas)
+            {
+                string postdataP = js.Serialize(item);
+                int respuestaP = js.Deserialize<int>(Utilitario.Accion.ConectREST("IPREGUNTA", "POST", postdataP));
+                foreach (OPCION_PREGUNTA_EL itemR in _Respuestas)
+                {
+                    if (item.iIdPregunta == itemR.iIdPregunta)
+                    {
+                        string postdataR = js.Serialize(itemR);
+                        int respuestaR = js.Deserialize<int>(Utilitario.Accion.ConectREST("IOPCION_PREGUNTA", "POST", postdataR));
+                    }
+                }
+            }
+
+            
+            
+
+
+            return Json(new { perosnalizaicon = perosnalizaicon, JsonRequestBehavior.AllowGet });
+        }
+
         // GET: Capacitacion/Details/5
         public ActionResult Details(int id)
         {

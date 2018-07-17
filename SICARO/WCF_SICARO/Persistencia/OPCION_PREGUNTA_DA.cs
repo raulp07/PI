@@ -64,7 +64,7 @@ namespace WCF_SICARO.Persistencia
                 {
                     com.CommandType = CommandType.StoredProcedure;
                     com.Parameters.Add("@iIdPregunta", SqlDbType.Int).Value = OP.iIdPregunta;
-                    com.Parameters.Add("@vEnunciadoOpcion", SqlDbType.VarChar).Value = OP.vEnunciadoOpcion;
+                    com.Parameters.Add("@vEnunciadoOpcion", SqlDbType.VarChar).Value = (OP.vEnunciadoOpcion == null?"": OP.vEnunciadoOpcion);
                     com.Parameters.Add("@iEstadoOpcion", SqlDbType.Int).Value = OP.iEstadoOpcion;
                     com.Parameters.Add("@iUsuarioCrea", SqlDbType.Int).Value = OP.iUsuarioCrea;
 
@@ -82,7 +82,7 @@ namespace WCF_SICARO.Persistencia
                     com.CommandType = CommandType.StoredProcedure;
                     com.Parameters.Add("@iIdOpcion", SqlDbType.Int).Value = OP.iIdOpcion;
                     com.Parameters.Add("@iIdPregunta", SqlDbType.Int).Value = OP.iIdPregunta;
-                    com.Parameters.Add("@vEnunciadoOpcion", SqlDbType.VarChar).Value = OP.vEnunciadoOpcion;
+                    com.Parameters.Add("@vEnunciadoOpcion", SqlDbType.VarChar).Value = (OP.vEnunciadoOpcion == null ? "" : OP.vEnunciadoOpcion);
                     com.Parameters.Add("@iEstadoOpcion", SqlDbType.Int).Value = OP.iEstadoOpcion;
                     com.Parameters.Add("@iUsuarioMod", SqlDbType.Int).Value = OP.iUsuarioMod;
 
