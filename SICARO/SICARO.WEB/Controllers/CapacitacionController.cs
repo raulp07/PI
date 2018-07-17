@@ -44,7 +44,7 @@ namespace SICARO.WEB.Controllers
         [HttpPost]
         public JsonResult RegistrarCapacitacion(GESTION_CAPACITACION_EL GestionCapacitacion,List<PREGUNTA_EL> _Preguntas, List<OPCION_PREGUNTA_EL> _Respuestas)
         {
-            string perosnalizaicon = "";
+            string perosnalizaicon = "1";
             string postdata = js.Serialize(GestionCapacitacion);
             int respuesta = js.Deserialize<int>(Utilitario.Accion.ConectREST("ICAPACITACION", "POST", postdata));
 

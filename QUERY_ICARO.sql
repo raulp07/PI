@@ -152,7 +152,7 @@ GO
 CREATE TABLE CAPACITACION_PERSONAL
 (
 iIdCapacitacionPersonal int primary key identity,
-iIdPersonal int FOREIGN KEY references PERSONAL(iIdPersonal),
+iIdPersonal int,-- FOREIGN KEY references PERSONAL(iIdPersonal),
 iIdCapacitacion int FOREIGN KEY references CAPACITACION(iIdCapacitacion),
 iPuntajePersonal int,
 vObservacionPersonal varchar(MAX),

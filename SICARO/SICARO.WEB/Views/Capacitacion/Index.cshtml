@@ -51,25 +51,31 @@
 
             <label for="fecha" class="col-sm-2 control-label">Fecha</label>
             <div class="col-sm-4">
-                <input class="form-control" id="dfecha" type="date" value="2017-06-01">
+                <div class="col-sm-12">
+                    <input class="form-control" id="dfecha" type="date" value="2017-06-01">
+                </div>
             </div>
-
 
             <label for="horarinicio" class="col-sm-2 control-label">Hora Inicio</label>
             <div class="col-sm-4">
-                <input class="form-control" id="horarinicio" type="time">
+                <div class="col-sm-6">
+                    <input class="form-control" id="horarinicio" type="time">
+                </div>
             </div>
         </div>
         <br />
         <div class="row">
             <label for="horartermino" class="col-sm-2 control-label">Hora Termino</label>
             <div class="col-sm-4">
-                <input class="form-control" id="horartermino" type="time" value="2017-06-01">
+                <div class="col-sm-6">
+                    <input class="form-control" id="horartermino" type="time" value="2017-06-01">
+                </div>
             </div>
-
             <label for="tiempotest" class="col-sm-2 control-label">Tiempo Test</label>
             <div class="col-sm-4">
-                <input class="form-control" id="tiempotest" type="text">
+                <div class="col-sm-4">
+                    <input id="tiempotest" class="form-control" type="number" max="60" min="10" step="10" value="20" />
+                </div>
             </div>
         </div>
         <br />
@@ -90,28 +96,28 @@
                     <div class="form-group">
                         <label for="ExpNombre" class="col-sm-4 control-label">Nombre</label>
                         <div class="col-sm-8">
-                            <input class="form-control" id="ExpNombre" type="text">
+                            <input class="form-control" id="ExpNombre" type="text" disabled>
                         </div>
                     </div>
                     <br /><br />
                     <div class="form-group">
                         <label for="ExpoApePat" class="col-sm-4 control-label">Apellido Paterno</label>
                         <div class="col-sm-8">
-                            <input class="form-control" id="ExpoApePat" type="text">
+                            <input class="form-control" id="ExpoApePat" type="text" disabled>
                         </div>
                     </div>
                     <br /><br />
                     <div class="form-group">
                         <label for="ExpoApeMat" class="col-sm-4 control-label">Apellido Materno</label>
                         <div class="col-sm-8">
-                            <input class="form-control" id="ExpoApeMat" type="text">
+                            <input class="form-control" id="ExpoApeMat" type="text" disabled>
                         </div>
                     </div>
                     <br /><br />
                     <div class="form-group hide">
                         <label for="ExpoEmpresa" class="col-sm-4 control-label">Empresa</label>
                         <div class="col-sm-8">
-                            <input class="form-control" id="ExpoEmpresa" type="text">
+                            <input class="form-control" id="ExpoEmpresa" type="text" disabled>
                         </div>
                     </div>
                 </fieldset>
@@ -202,8 +208,8 @@
                     <br />
                     <div class="row">
                         <label class="">Tipo Respuesta</label>
-                        <label class="radio-inline"><input type="radio" v-on:click="" name="optRespuesta" value="1" checked>V/F</label>
-                        <label class="radio-inline"><input type="radio" v-on:click="" name="optRespuesta" value="2">Opción</label>
+                        <label class="radio-inline"><input type="radio" class="radio" v-on:click="" name="optRespuesta" value="1" checked>V/F</label>
+                        <label class="radio-inline"><input type="radio" class="radio" v-on:click="" name="optRespuesta" value="2">Opción</label>
                     </div>
                     <div id="tipoRespuestaVF" class="row ">
                         <fieldset>

@@ -119,6 +119,19 @@ namespace WCF_SICARO
         }
         //================================================================
 
+        // PROVEEDOR ==================================================
+        public List<CAPACITACION_PERSONAL_EL> GetAllCAPACITACION_PERSONAL(CAPACITACION_PERSONAL_EL CP) {
+            return CAPACITACION_PERSONAL_DA.Accion.GetAllCAPACITACION_PERSONAL(CP);
+        }
+        public int InsertCAPACITACION_PERSONAL(CAPACITACION_PERSONAL_EL CP) {
+            return CAPACITACION_PERSONAL_DA.Accion.InsertCAPACITACION_PERSONAL(CP);
+        }
+        public int UpdateCAPACITACION_PERSONAL(CAPACITACION_PERSONAL_EL CP) {
+            return CAPACITACION_PERSONAL_DA.Accion.UpdateCAPACITACION_PERSONAL(CP);
+        }
+        //================================================================
+
+
 
     }
 }

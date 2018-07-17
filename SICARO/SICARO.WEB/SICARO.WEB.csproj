@@ -206,6 +206,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CAPACITACION_EL.cs" />
+    <Compile Include="Models\CAPACITACION_PERSONAL_EL.cs" />
     <Compile Include="Models\EVALUACIONPROVEEDORPREGUNTA_EL.cs" />
     <Compile Include="Models\EVALUACION_PROVEEDOR_EL.cs" />
     <Compile Include="Models\GESTION_CAPACITACION_EL.cs" />
@@ -245,6 +246,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\JsGestionCapacitacion\GestionCapacitacion.js" />
+    <Content Include="Scripts\JsTestEvaluacion\TestEvaluacion.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />

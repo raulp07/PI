@@ -97,6 +97,7 @@
   <ItemGroup>
     <Compile Include="ConexionUtil.cs" />
     <Compile Include="Dominio\CAPACITACION_EL.cs" />
+    <Compile Include="Dominio\CAPACITACION_PERSONAL_EL.cs" />
     <Compile Include="Dominio\EVALUACIONPROVEEDORPREGUNTA_EL.cs" />
     <Compile Include="Dominio\EVALUACION_PROVEEDOR_EL.cs" />
     <Compile Include="Dominio\GESTION_CAPACITACION_EL.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Dominio\TEST_EL.cs" />
     <Compile Include="Dominio\UBIGEO_EL.cs" />
     <Compile Include="Persistencia\CAPACITACION_DA.cs" />
+    <Compile Include="Persistencia\CAPACITACION_PERSONAL_DA.cs" />
     <Compile Include="Persistencia\EVALUACIONPROVEEDORPREGUNTA_DA.cs" />
     <Compile Include="Persistencia\EVALUACION_PROVEEDOR_DA.cs" />
     <Compile Include="Persistencia\GESTION_CAPACITACION_DA.cs" />

@@ -94,6 +94,17 @@ namespace WCF_SICARO
         [WebInvoke(Method = "POST", UriTemplate = "PROVEEDOR", ResponseFormat = WebMessageFormat.Json)]
         List<PROVEEDOR_EL> GetAllPROVEEDOR(PROVEEDOR_EL P);
 
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "CAPACITACION_PERSONAL", ResponseFormat = WebMessageFormat.Json)]
+        List<CAPACITACION_PERSONAL_EL> GetAllCAPACITACION_PERSONAL(CAPACITACION_PERSONAL_EL CP);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "ICAPACITACION_PERSONAL", ResponseFormat = WebMessageFormat.Json)]
+        int InsertCAPACITACION_PERSONAL(CAPACITACION_PERSONAL_EL CP);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "UCAPACITACION_PERSONAL", ResponseFormat = WebMessageFormat.Json)]
+        int UpdateCAPACITACION_PERSONAL(CAPACITACION_PERSONAL_EL CP);
     }
 
 

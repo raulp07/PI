@@ -197,6 +197,5 @@ D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB\bin\es\Microsoft.Owin.Security.Facebook
 D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB\bin\es\Microsoft.Owin.Security.Google.resources.dll
 D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB\bin\es\Microsoft.Owin.Security.Twitter.resources.dll
 D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB\obj\Debug\SICARO.WEB.csprojResolveAssemblyReference.cache
 D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB\obj\Debug\SICARO.WEB.dll
 D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB\obj\Debug\SICARO.WEB.pdb

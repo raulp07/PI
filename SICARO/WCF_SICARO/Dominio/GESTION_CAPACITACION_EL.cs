@@ -62,24 +62,24 @@ namespace WCF_SICARO.Dominio
         /// Gets or Sets tHoraInicio
         ///
         [DataMember]
-        public DateTime tHoraInicio
+        public string tHoraInicio
         {
             get { return _tHoraInicio; }
             set { _tHoraInicio = value; }
         }
-        private DateTime _tHoraInicio;
+        private string _tHoraInicio;
 
         ///
 
         /// Gets or Sets tHoraFin
         ///
         [DataMember]
-        public DateTime tHoraFin
+        public string tHoraFin
         {
             get { return _tHoraFin; }
             set { _tHoraFin = value; }
         }
-        private DateTime _tHoraFin;
+        private string _tHoraFin;
 
         ///
 

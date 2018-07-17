@@ -274,10 +274,25 @@ CREATE PROCEDURE [spGet_PREGUNTA]
 @iIdPregunta int =0
 AS
 BEGIN
-SELECT *
+
+declare @hora_Actual time
+declare @idGestionCapatacion int
+declare @idtest int
+declare @tiempoTest int
+
+set @hora_Actual = (select convert(char(8), getdate(), 108) )
+
+
+select @idGestionCapatacion = gp.iIdGestionCapacitacion, @tiempoTest = gp.iTiempoTest from GESTION_CAPACITACION gp
+where (@hora_Actual between gp.tHoraInicio and gp.tHoraFin ) and CONVERT(date, gp.dFechaRealizacionCapacitacion, 112) = CONVERT(date, GETDATE(), 112)
+
+set @idtest = (select t.iIdTest from TEST t where t.iIdGestorCapacitacion = @idGestionCapatacion)
+
+SELECT p.iIdPregunta,p.iIdTest,p.vEnunciadoPregunta,p.iPuntajePregunta,p.iTipoRespuestaPregunta, @tiempoTest as 'iUsuarioCrea',p.dFechaCrea,p.iUsuarioMod,p.dFechaMod
 FROM
-PREGUNTA
+PREGUNTA p
 where (iIdPregunta = @iIdPregunta or @iIdPregunta=0)
+and iIdTest = @idtest
 END
 
 
@@ -816,6 +831,96 @@ END
 
 /*  ================================================================= */
 
+/* ===================  CAPACITACION PERSONAL ============================*/
+
+
+Go
+CREATE PROCEDURE [spGet_CAPACITACION_PERSONAL]
+@iIdCapacitacionPersonal INT =0 
+AS
+BEGIN
+SELECT *
+FROM
+CAPACITACION_PERSONAL
+where (iIdCapacitacionPersonal = @iIdCapacitacionPersonal or @iIdCapacitacionPersonal = 0)
+END
+GO
+CREATE PROCEDURE [spInsertCAPACITACION_PERSONAL]
+@iIdPersonal int,
+@iIdCapacitacion int,
+@iPuntajePersonal int,
+@vObservacionPersonal varchar(max),
+@iAsistenciaPersonal int,
+@iUsuarioCrea int
+AS
+BEGIN
+
+
+
+declare @hora_Actual time
+declare @idtest int
+declare @tiempoTest int
+
+set @hora_Actual = (select convert(char(8), getdate(), 108) )
+set @iIdCapacitacion = (select  gp.iIdCapacitacion from GESTION_CAPACITACION gp
+where (@hora_Actual between gp.tHoraInicio and gp.tHoraFin ) and 
+CONVERT(date, gp.dFechaRealizacionCapacitacion, 112) = CONVERT(date, GETDATE(), 112))
+
+if not exists (select  gp.iIdCapacitacion from GESTION_CAPACITACION gp
+where (@hora_Actual between gp.tHoraInicio and gp.tHoraFin ) and 
+CONVERT(date, gp.dFechaRealizacionCapacitacion, 112) = CONVERT(date, GETDATE(), 112))
+begin
+	set @iIdCapacitacion = (select max(iIdCapacitacion) from CAPACITACION)
+end
+
+
+INSERT INTO 
+CAPACITACION_PERSONAL(
+iIdPersonal,
+iIdCapacitacion,
+iPuntajePersonal,
+vObservacionPersonal,
+iAsistenciaPersonal,
+iUsuarioCrea,
+dFechaCrea
+)
+VALUES (
+1,--@iIdPersonal,
+@iIdCapacitacion,
+@iPuntajePersonal,
+@vObservacionPersonal,
+@iAsistenciaPersonal,
+@iUsuarioCrea,
+GETDATE()
+)
+END
+
+GO
+CREATE PROCEDURE [spUpdateCAPACITACION_PERSONAL]
+@iIdCapacitacionPersonal int,
+@iIdPersonal int,
+@iIdCapacitacion int,
+@iPuntajePersonal int,
+@vObservacionPersonal varchar(max),
+@iAsistenciaPersonal int,
+@iUsuarioMod int
+AS
+BEGIN
+UPDATE
+CAPACITACION_PERSONAL
+SET
+iIdPersonal = @iIdPersonal,
+iIdCapacitacion = @iIdCapacitacion,
+iPuntajePersonal = @iPuntajePersonal,
+vObservacionPersonal = @vObservacionPersonal,
+iAsistenciaPersonal = @iAsistenciaPersonal,
+iUsuarioMod = @iUsuarioMod,
+dFechaMod = GETDATE()
+WHERE
+iIdCapacitacionPersonal = @iIdCapacitacionPersonal
+END
+
+/*  ================================================================= */
 
 USE [BDICARO]
 GO

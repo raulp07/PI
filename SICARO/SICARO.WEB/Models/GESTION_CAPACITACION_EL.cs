@@ -56,23 +56,23 @@ namespace SICARO.WEB.Models
 
         /// Gets or Sets tHoraInicio
         ///
-        public DateTime tHoraInicio
+        public string tHoraInicio
         {
             get { return _tHoraInicio; }
             set { _tHoraInicio = value; }
         }
-        private DateTime _tHoraInicio;
+        private string _tHoraInicio;
 
         ///
 
         /// Gets or Sets tHoraFin
         ///
-        public DateTime tHoraFin
+        public string tHoraFin
         {
             get { return _tHoraFin; }
             set { _tHoraFin = value; }
         }
-        private DateTime _tHoraFin;
+        private string _tHoraFin;
 
         ///
 

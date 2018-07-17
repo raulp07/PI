@@ -9,7 +9,7 @@
         vCodCapacitacion: "",
         vTemaCapacitacion: "",
         vCodPersonal: "",
-        iIdPersonal:0,
+        iIdPersonal: 0,
         codPregunta: 1,
         EstadoActualizar: 0,
         NotaMaxima: 20,
@@ -47,7 +47,7 @@
             this.iIdPersonal = iIdPersonal;
         },
         AceptarExpositor: function () {
-            
+
             var _Lista_Personal = this.Lista_Personal;
             var _vCodPersonal = this.vCodPersonal;
             var _lista = _Lista_Personal.find(function (val) {
@@ -265,6 +265,13 @@
         },
         GrabarCapacitacion: function () {
 
+            var _horarinicio = $('#horarinicio').val();
+            var _horartermino = $('#horartermino').val();
+            if (_horartermino <= _horarinicio) {
+                alert("La hora final es mayor a la hora de inicio");
+                return;
+            }
+
             this.ValidarCantidadPreguntas();
 
 
@@ -276,19 +283,19 @@
                 'tHoraFin': $('#horartermino').val(),
                 'iTiempoTest': $('#tiempotest').val()
             }
-            
+
             var _Lista_Preguntas = this.Lista_Preguntas;
             var _Preguntas = [];
             $.each(_Lista_Preguntas, function (key, val) {
                 var dato = {
                     "iIdPregunta": parseInt(val.codpregunta),
                     "vEnunciadoPregunta": val.Enunciadotest,
-                    "iPuntajePregunta":val.valortest,
+                    "iPuntajePregunta": val.valortest,
                     "iTipoRespuestaPregunta": val.optradio
                 };
                 _Preguntas.push(dato);
             });
-            
+
             var _OpcionesRespuesta = this.OpcionesRespuesta;
             var _Respuestas = [];
             $.each(_OpcionesRespuesta, function (key, val) {
@@ -301,7 +308,15 @@
             });
             var jsonData = { GestionCapacitacion: GestionCapacitacion, _Preguntas: _Preguntas, _Respuestas: _Respuestas };
             axios.post("/Capacitacion/RegistrarCapacitacion/", jsonData).then(function (response) {
-                this.Lista_Capacitacion = response.data.ListaCAPACITACION;
+                if (response.data.perosnalizaicon == 1) {
+                    alert('La Capacitacion se programo correctamente');
+                    this.Estado_Almacenamiento_Preguntas = 0;
+                    this.Estado_Almacenamiento_Operarios = 0;
+                } else {
+                    alert('Ocurrio un error');
+                }
+
+
             }.bind(this)).catch(function (error) {
             });
         },

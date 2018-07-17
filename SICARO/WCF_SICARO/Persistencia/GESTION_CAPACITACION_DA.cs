@@ -49,8 +49,8 @@ namespace WCF_SICARO.Persistencia
                             if (dataReader["iIdCapacitacion"] != DBNull.Value) { obj.iIdCapacitacion = (int)dataReader["iIdCapacitacion"]; }
                             if (dataReader["iIdRepresentante"] != DBNull.Value) { obj.iIdRepresentante = (int)dataReader["iIdRepresentante"]; }
                             if (dataReader["dFechaRealizacionCapacitacion"] != DBNull.Value) { obj.dFechaRealizacionCapacitacion = (DateTime)dataReader["dFechaRealizacionCapacitacion"]; }
-                            if (dataReader["tHoraInicio"] != DBNull.Value) { obj.tHoraInicio = (DateTime)dataReader["tHoraInicio"]; }
-                            if (dataReader["tHoraFin"] != DBNull.Value) { obj.tHoraFin = (DateTime)dataReader["tHoraFin"]; }
+                            if (dataReader["tHoraInicio"] != DBNull.Value) { obj.tHoraInicio = (string)dataReader["tHoraInicio"]; }
+                            if (dataReader["tHoraFin"] != DBNull.Value) { obj.tHoraFin = (string)dataReader["tHoraFin"]; }
                             if (dataReader["iTiempoTest"] != DBNull.Value) { obj.iTiempoTest = (int)dataReader["iTiempoTest"]; }
                             if (dataReader["iUsuarioCrea"] != DBNull.Value) { obj.iUsuarioCrea = (int)dataReader["iUsuarioCrea"]; }
                             if (dataReader["dFechaCrea"] != DBNull.Value) { obj.dFechaCrea = (DateTime)dataReader["dFechaCrea"]; }
@@ -79,8 +79,8 @@ namespace WCF_SICARO.Persistencia
                     com.Parameters.Add("@iIdCapacitacion", SqlDbType.Int).Value = GC.iIdCapacitacion;
                     com.Parameters.Add("@iIdRepresentante", SqlDbType.Int).Value = GC.iIdRepresentante;
                     com.Parameters.Add("@dFechaRealizacionCapacitacion", SqlDbType.Date).Value = GC.dFechaRealizacionCapacitacion;
-                    com.Parameters.Add("@tHoraInicio", SqlDbType.Time).Value = "05:30";//GC.tHoraInicio.ToSho;
-                    com.Parameters.Add("@tHoraFin", SqlDbType.Time).Value = "05:30"; //GC.tHoraFin.ToShortTimeString();
+                    com.Parameters.Add("@tHoraInicio", SqlDbType.Time).Value = GC.tHoraInicio;
+                    com.Parameters.Add("@tHoraFin", SqlDbType.Time).Value = GC.tHoraFin;
                     com.Parameters.Add("@iTiempoTest", SqlDbType.Int).Value = GC.iTiempoTest;
                     com.Parameters.Add("@iUsuarioCrea", SqlDbType.Int).Value = GC.iUsuarioCrea;
 
@@ -101,8 +101,8 @@ namespace WCF_SICARO.Persistencia
                     com.Parameters.Add("@iIdCapacitacion", SqlDbType.Int).Value = GC.iIdCapacitacion;
                     com.Parameters.Add("@iIdRepresentante", SqlDbType.Int).Value = GC.iIdRepresentante;
                     com.Parameters.Add("@dFechaRealizacionCapacitacion", SqlDbType.Date).Value = GC.dFechaRealizacionCapacitacion;
-                    com.Parameters.Add("@tHoraInicio", SqlDbType.Time).Value = GC.tHoraInicio.ToShortTimeString();
-                    com.Parameters.Add("@tHoraFin", SqlDbType.Time).Value = GC.tHoraFin.ToShortTimeString();
+                    com.Parameters.Add("@tHoraInicio", SqlDbType.Time).Value = GC.tHoraInicio;
+                    com.Parameters.Add("@tHoraFin", SqlDbType.Time).Value = GC.tHoraFin;
                     com.Parameters.Add("@iTiempoTest", SqlDbType.Int).Value = GC.iTiempoTest;
                     com.Parameters.Add("@iUsuarioMod", SqlDbType.Int).Value = GC.iUsuarioCrea;
 
