@@ -1,4 +1,9 @@
-﻿new Vue({
+﻿
+
+
+
+
+new Vue({
     el: "#app",
     data: {
         Lista_Capacitacion: [],
@@ -6,6 +11,8 @@
         Lista_Operarios: [],
         Lista_Preguntas: [],
         OpcionesRespuesta: [],
+        tempOpcionesRespuesta: [],
+        tempOpcionesRespuestaMultiple: [],
         vCodCapacitacion: "",
         vTemaCapacitacion: "",
         vCodPersonal: "",
@@ -15,6 +22,7 @@
         NotaMaxima: 20,
         Estado_Almacenamiento_Preguntas: 0,
         Estado_Almacenamiento_Operarios: 0,
+        Estado_Ver_Test: 0,
     },
     methods: {
         ListaCapacitacion: function () {
@@ -34,8 +42,8 @@
             this.iIdCapacitacion = iIdCapacitacion;
             this.vCodCapacitacion = vCodCapacitacion;
             this.vTemaCapacitacion = vTemaCapacitacion;
-            $("#CAPACITACION").hide();
-            $("#GESTIONCAPACITACION").show();
+            $('#GESTIONCAPACITACION').removeClass('hide');
+            $('#CAPACITACION').addClass('hide');
             this.ListarPersonal();
         },
         MostrarPersonal: function () {
@@ -59,12 +67,27 @@
             $("#ModalPersonal").modal('hide');
         },
         PrepararTest: function () {
+            this.Estado_Ver_Test = 0;
+            $('#ModalTest input').attr('disabled', false);
+            $('#ModalTest button').attr('disabled', false);
+
             $("#ModalTest").modal('show');
+
         },
         VerTest: function () {
+            this.Estado_Ver_Test = 1;
+            $("#ModalTest").modal('show');
+            $('#ModalTest input').attr('disabled', true);
+            $('#ModalTest button').attr('disabled', true);
+            $('#ModalTest .btncalcelartest').attr('disabled', false);
+            $('#ModalTest input[value = Editar]').attr('disabled', false);
+
+
         },
         AgregarOperarios: function () {
+
             var _vCodPersonal = this.vCodPersonal;
+
             if (this.vCodPersonal.length != 0) {
                 var _Lista_Personal = this.Lista_Personal;
                 _Lista_Personal = _Lista_Personal.filter(function (eval) {
@@ -74,10 +97,18 @@
             } else {
                 this.Lista_Operarios = this.Lista_Personal;
             }
+            $('#ModalOperario input').attr('disabled', false);
+            $('#ModalOperario button').attr('disabled', false);
             $("#ModalOperario").modal('show');
 
         },
         VerOperarios: function () {
+            this.Lista_Operarios = this.Lista_Personal;
+            $('#ModalOperario input').attr('disabled', true);
+            $('#ModalOperario button').attr('disabled', true);
+            $('#ModalOperario .cancelaroperarios').attr('disabled', false);
+            $("#ModalOperario").modal('show');
+
         },
         GrabarOpcionVF: function () {
             var datos = this.OpcionesRespuesta;
@@ -105,13 +136,24 @@
         },
         AgregarRespuesta: function () {
             var datos = this.OpcionesRespuesta;
+            var _codPregunta = this.codPregunta;
+
+            var _ValidarE = datos.find(function (val) {
+                return (val.estadovalor == 1 && val.codpregunta == _codPregunta);
+            });
+            if (_ValidarE != undefined) {
+                alert('Ya hay una respuesta con la opcion correcta');
+                return;
+            }
+
+
             var _ResTextOpcion = $('#ResTextOpcion').val().trim();
             var _chkEstadoCorrecto = $('#chkEstadoCorrecto').is(':checked') ? 'Correcto' : 'Incorrecto';
             var _estadovalor = $('#chkEstadoCorrecto').is(':checked') ? 1 : 0;
-            var _codPregunta = this.codPregunta;
+
 
             var _Validar = datos.find(function (val) {
-                return val.Respuesta == _ResTextOpcion;
+                return (val.Respuesta == _ResTextOpcion && val.codpregunta == _codPregunta);
             });
             if (_Validar != undefined) {
                 alert('Ya existe una respuesta igual');
@@ -120,13 +162,93 @@
             var list = { "codpregunta": _codPregunta, "Respuesta": _ResTextOpcion, "estado": _chkEstadoCorrecto, "estadovalor": _estadovalor };
             datos.push(list);
             this.OpcionesRespuesta = datos;
-        },
-        QuitarOpcion: function (Respuesta) {
-            var datos = this.OpcionesRespuesta;
-            var result = datos.filter(function (elem) {
-                return elem.Respuesta != Respuesta;
+
+            var _ListaO = [];
+            var _ListaO = datos.filter(function (elem) {
+                return elem.codpregunta == _codPregunta;
             });
-            this.OpcionesRespuesta = result;
+            //$.each(datos, function (k, v) {
+            //    if (v.codpregunta == _codPregunta) {
+            //        var list = { "codpregunta": v.codpregunta, "Respuesta": v.Respuesta, "estado": v.estado, "estadovalor": v.estadovalor };
+            //        _ListaO.push(list);
+            //    }
+            //});
+
+            this.tempOpcionesRespuesta = _ListaO;
+
+
+            $('#ResTextOpcion').val('');
+            $('#chkEstadoCorrecto').attr('checked', false);
+        },
+        AgregarRespuestaMultiple: function () {
+            var datos = this.OpcionesRespuesta;
+            var _codPregunta = this.codPregunta;
+
+            
+            var _ResTextOpcion = $('#ResTextOpcionMultiple').val().trim();
+            var _chkEstadoCorrecto = $('#chkEstadoCorrectoMultiple').is(':checked') ? 'Correcto' : 'Incorrecto';
+            var _estadovalor = $('#chkEstadoCorrectoMultiple').is(':checked') ? 1 : 0;
+
+
+            var _Validar = datos.find(function (val) {
+                return (val.Respuesta == _ResTextOpcion && val.codpregunta == _codPregunta);
+            });
+            if (_Validar != undefined) {
+                alert('Ya existe una respuesta igual');
+                return;
+            }
+            var list = { "codpregunta": _codPregunta, "Respuesta": _ResTextOpcion, "estado": _chkEstadoCorrecto, "estadovalor": _estadovalor };
+            datos.push(list);
+            this.OpcionesRespuesta = datos;
+
+            var _ListaO = datos.filter(function (elem) {
+                return elem.codpregunta == _codPregunta;
+            });
+            //$.each(datos, function (k, v) {
+            //    if (v.codpregunta == _codPregunta) {
+            //        var list = { "codpregunta": v.codpregunta, "Respuesta": v.Respuesta, "estado": v.estado, "estadovalor": v.estadovalor };
+            //        _ListaO.push(list);
+            //    }
+            //});
+
+            this.tempOpcionesRespuestaMultiple = _ListaO;
+
+
+            $('#ResTextOpcionMultiple').val('');
+            $('#chkEstadoCorrectoMultiple').attr('checked', false);
+        },
+        QuitarOpcion: function (Respuesta, codpregunta) {
+            if (this.Estado_Ver_Test == 0) {
+                var datos = this.OpcionesRespuesta;
+                var result = datos.filter(function (elem) {
+
+                    return (elem.Respuesta != Respuesta || elem.codpregunta != codpregunta);
+                });
+                this.OpcionesRespuesta = result;
+                var _ListaO = result.filter(function (elem) {
+                    return elem.codpregunta == codpregunta;
+                });
+
+                this.tempOpcionesRespuesta = _ListaO;
+            }
+
+        },
+        QuitarOpcionMultiple: function (Respuesta, codpregunta) {
+            
+            if (this.Estado_Ver_Test == 0) {
+                var datos = this.OpcionesRespuesta;
+                var result = datos.filter(function (elem) {
+
+                    return (elem.Respuesta != Respuesta || elem.codpregunta != codpregunta);
+                });
+                this.OpcionesRespuesta = result;
+                var _ListaO = result.filter(function (elem) {
+                    return elem.codpregunta == codpregunta;
+                });
+
+                this.tempOpcionesRespuestaMultiple = _ListaO;
+            }
+
         },
         AgregarPregunta: function () {
             if (this.EstadoActualizar == 0) {
@@ -171,13 +293,28 @@
                     alert('La suma del valor de las preguntas sobrevasa el puntaje maximo se recomienda un valor de ' + (100 - sumatoria_puntos));
                     return;
                 };
+                if (_optradio == 2) {
+                    var datosR = this.OpcionesRespuesta;
+                    var _Validar = datosR.find(function (val) {
+                        return (val.estadovalor == 1 && val.codpregunta == _codPregunta);
+                    });
+                    if (_Validar == undefined) {
+                        alert('Debe ingresar una opcion con estado correcto');
+                        return;
+                    }
+
+                }
 
                 var lista = { "codpregunta": _codPregunta, "Enunciadotest": _Enunciadotest, "TipoRespuesta": _TipoRespuesta, "optradio": _optradio, "valortestPorcentaje": _valortest_porcentaje, "valortest": _valortest };
                 datos.push(lista);
 
-                this.GrabarOpcionVF();
+                if (_optradio == 1) {
+                    this.GrabarOpcionVF();
+                }
+
                 this.codPregunta = _codPregunta + 1;
                 this.Lista_Preguntas = datos;
+
             } else {
 
                 var _codpregunta = this.EstadoActualizar;
@@ -221,18 +358,41 @@
             var _ListaP = _Lista_Preguntas.find(function (val) {
                 return val.codpregunta == codpregunta;
             });
-            var _ListaO = _OpcionesRespuesta.find(function (val) {
-                return val.codpregunta == codpregunta;
-            });
+
+            var _ListaO = [];
+
             $('#Enunciadotest').val(_ListaP.Enunciadotest);
             $('#valortest').val(_ListaP.valortest);
 
             $('input:radio[name=optradio][value=' + _ListaP.optradio + ']').prop('checked', true);
-            $('input:radio[name=opRespuesta][value=' + _ListaO.estadovalor + ']').prop('checked', true);
+            if (_ListaP.optradio == 1) {
+                $('#tipoRespuestaOpciones').addClass('hide');
+                $('#tipoRespuestaVF').removeClass('hide');
+                _ListaO = _OpcionesRespuesta.find(function (val) {
+                    return val.codpregunta == codpregunta;
+                });
+                $('input:radio[name=opRespuesta][value=' + _ListaO.estadovalor + ']').prop('checked', true);
+
+
+            } else if (_ListaP.optradio == 2) {
+                $('#tipoRespuestaVF').addClass('hide');
+                $('#tipoRespuestaOpciones').removeClass('hide');
+
+                $.each(_OpcionesRespuesta, function (k, v) {
+                    if (v.codpregunta == codpregunta) {
+                        var list = { "codpregunta": v.codpregunta, "Respuesta": v.Respuesta, "estado": v.estado, "estadovalor": v.estadovalor };
+                        _ListaO.push(list);
+                    }
+                });
+                this.tempOpcionesRespuesta = _ListaO;
+            }
+
 
             $('#btnAgregarPregunta').text('Actualizar Pregunta');
             $('#btnCancelarPregunta').removeClass('hide');
             this.EstadoActualizar = _ListaP.codpregunta;
+
+
 
         },
         CancelarPregunta: function () {
@@ -244,6 +404,7 @@
             this.EstadoActualizar = 0;
             $('#btnCancelarPregunta').addClass('hide');
             $('#btnAgregarPregunta').text('Agregar Pregunta');
+            this.tempOpcionesRespuesta = [];
         },
         GrabarPreguntas: function () {
             this.ValidarCantidadPreguntas();
@@ -273,7 +434,6 @@
             }
 
             this.ValidarCantidadPreguntas();
-
 
             var GestionCapacitacion = {
                 'iIdCapacitacion': this.iIdCapacitacion,
@@ -310,12 +470,13 @@
             axios.post("/Capacitacion/RegistrarCapacitacion/", jsonData).then(function (response) {
                 if (response.data.perosnalizaicon == 1) {
                     alert('La Capacitacion se programo correctamente');
-                    this.Estado_Almacenamiento_Preguntas = 0;
-                    this.Estado_Almacenamiento_Operarios = 0;
+                    //this.Estado_Almacenamiento_Preguntas = 0;
+                    //this.Estado_Almacenamiento_Operarios = 0;
+                    $('#GESTIONCAPACITACION').addClass('hide');
+                    $('#CAPACITACION').removeClass('hide');
                 } else {
                     alert('Ocurrio un error');
                 }
-
 
             }.bind(this)).catch(function (error) {
             });
@@ -335,6 +496,22 @@
                 this.Estado_Almacenamiento_Preguntas = 0;
                 return;
             };
+        },
+        TipoRespuestas: function () {
+            if ($('input[name="optRespuesta"]:checked').val() == 1) {                
+                $('#tipoRespuestaVF').removeClass('hide');
+                $('#tipoRespuestaOpciones').addClass('hide');
+                $('#tipoRespuestaOpcionesMultiple').addClass('hide');
+            } else if ($('input[name="optRespuesta"]:checked').val() == 2) {
+                $('#tipoRespuestaVF').addClass('hide');
+                $('#tipoRespuestaOpciones').removeClass('hide');
+                $('#tipoRespuestaOpcionesMultiple').addClass('hide');
+            } else if ($('input[name="optRespuesta"]:checked').val() == 3) {
+                $('#tipoRespuestaVF').addClass('hide');
+                $('#tipoRespuestaOpciones').addClass('hide');
+                $('#tipoRespuestaOpcionesMultiple').removeClass('hide');
+                
+            }
         },
     },
     computed: {},

@@ -36,8 +36,11 @@
             </table>
 
         </div>
+
     </div>
-    <div id="GESTIONCAPACITACION" style="display:none">
+
+
+    <div id="GESTIONCAPACITACION" class="hide">
 
         <div class="row">
             <h1 class="text-center">Getión de Capactiacion {{ vCodCapacitacion }}</h1>
@@ -183,6 +186,40 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="ModalPersonal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Lista Personal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <td>Nombre</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="lista in Lista_Personal">
+                                <td>{{lista.vCodPersonal}}</td>
+                                <td>{{ lista.vNombrePersonal }} {{lista.vApellidoPaternoPersonal}} {{lista.vApellidoMaternoPersonal}}</td>
+                                <td><label class="radio-inline"><input type="radio" v-on:click="ExpositorSeleccionado(lista.vCodPersonal,lista.iIdPersonal)" name="optExpositor"></label></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" v-on:click="AceptarExpositor">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Test -->
     <div id="ModalTest" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -208,8 +245,9 @@
                     <br />
                     <div class="row">
                         <label class="">Tipo Respuesta</label>
-                        <label class="radio-inline"><input type="radio" class="radio" v-on:click="" name="optRespuesta" value="1" checked>V/F</label>
-                        <label class="radio-inline"><input type="radio" class="radio" v-on:click="" name="optRespuesta" value="2">Opción</label>
+                        <label class="radio-inline"><input type="radio" class="radio" v-on:click="TipoRespuestas" name="optRespuesta" value="1" checked>V/F</label>
+                        <label class="radio-inline"><input type="radio" class="radio" v-on:click="TipoRespuestas" name="optRespuesta" value="2">Opción</label>
+                        <label class="radio-inline"><input type="radio" class="radio" v-on:click="TipoRespuestas" name="optRespuesta" value="3">Opción Multiple</label>
                     </div>
                     <div id="tipoRespuestaVF" class="row ">
                         <fieldset>
@@ -253,11 +291,55 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="lista in OpcionesRespuesta">
+                                            <tr v-for="lista in tempOpcionesRespuesta">
                                                 <td>{{ lista.Respuesta }}</td>
                                                 <td>{{ lista.estado }}</td>
                                                 <td>
-                                                    <input type="button" value="X" v-on:click="QuitarOpcion(lista.Respuesta)" class="btn btn-default" />
+                                                    <input type="button" value="X" v-on:click="QuitarOpcion(lista.Respuesta,lista.codpregunta)" class="btn btn-default" />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+                        </fieldset>
+                    </div>
+                    <div id="tipoRespuestaOpcionesMultiple" class="row hide">
+                        <fieldset>
+                            <legend>Opciones Multiples</legend>
+                            <div class="container">
+                                <div class="row">
+                                    <label>Respuesta :</label>
+                                    <input class="form-control" id="ResTextOpcionMultiple" type="text">
+                                </div>
+                                <div class="row">
+                                    <div class="checkbox col-md-6">
+                                        <label><input type="checkbox" value="" id="chkEstadoCorrectoMultiple">Estado correcto</label>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-secondary col-md-8 col-md-offset-2" v-on:click="AgregarRespuestaMultiple" id="GrabarOpcion">Agregar</button>
+                                    </div>
+
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <td>Respuesta</td>
+                                                <td>Estado</td>
+                                                <td></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="lista in tempOpcionesRespuestaMultiple">
+                                                <td>{{ lista.Respuesta }}</td>
+                                                <td>{{ lista.estado }}</td>
+                                                <td>
+                                                    <input type="button" value="X" v-on:click="QuitarOpcionMultiple(lista.Respuesta,lista.codpregunta)" class="btn btn-default" />
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -306,7 +388,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="col-sm-4 col-sm-offset-1">
-                        <button type="button" class="btn btn-default" v-on:click="CancelarPreguntas()">Cancelar</button>
+                        <button type="button" class="btn btn-default btncalcelartest" v-on:click="CancelarPreguntas()">Cancelar</button>
                     </div>
                     <div class="col-sm-4 col-sm-offset-1">
                         <button type="button" class="btn btn-primary" v-on:click="GrabarPreguntas()">Gabar</button>
@@ -349,7 +431,7 @@
                                     <td class="col-sm-8">{{ lista.vNombrePersonal }} {{ lista.vApellidoPaternoPersonal }}</td>
                                     <td class="col-sm-2">{{ lista.iIdArea }}</td>
                                     <td class="col-sm-2">
-                                        <input type="checkbox" class="checkbox" />
+                                        <input type="checkbox" class="checkbox" disabled="disabled"/>
                                     </td>
                                 </tr>
                             </tbody>
@@ -358,7 +440,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="col-sm-4 col-sm-offset-1">
-                        <button type="button" class="btn btn-default" v-on:click="CancelarOperarios()">Cancelar</button>
+                        <button type="button" class="btn btn-default cancelaroperarios" v-on:click="CancelarOperarios()">Cancelar</button>
                     </div>
                     <div class="col-sm-4 col-sm-offset-1">
                         <button type="button" class="btn btn-primary" v-on:click="GrabarOperarios()">Gabar</button>
@@ -370,8 +452,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 <script src="~/Scripts/JsCapacitacion/Capacitacion.js"></script>
