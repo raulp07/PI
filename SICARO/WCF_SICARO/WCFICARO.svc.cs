@@ -15,6 +15,11 @@ namespace WCF_SICARO
     public class WCFICARO : IWCFICARO
     {
 
+        public List<CAPACITACION_EL> GetAllCAPACITACION1()
+        {
+            return CAPACITACION_DA.Accion.GetAllCAPACITACION1();
+        }
+
         // CAPACITACION ==================================================
         public List<CAPACITACION_EL> GetAllCAPACITACION(CAPACITACION_EL C)
         {

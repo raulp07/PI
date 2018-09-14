@@ -124,6 +124,22 @@ namespace WCF_SICARO.Dominio
         /// Gets or Sets dFechaMod
         ///
         [DataMember]
+        public decimal dLatitud
+        {
+            get { return _dLatitud; }
+            set { _dLatitud = value; }
+        }
+        private decimal _dLatitud;
+
+        [DataMember]
+        public decimal dLongitud
+        {
+            get { return _dLongitud; }
+            set { _dLongitud = value; }
+        }
+        private decimal _dLongitud;
+
+        [DataMember]
         public DateTime dFechaMod
         {
             get { return _dFechaMod; }

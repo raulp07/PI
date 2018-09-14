@@ -1,5 +1,7 @@
 
 
+IF OBJECT_ID ( 'spGet_CAPACITACION', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spGet_CAPACITACION;  
 Go
 CREATE PROCEDURE [spGet_CAPACITACION]
 @iIdCapacitacion int = 0
@@ -11,9 +13,11 @@ CAPACITACION
 where (iIdCapacitacion = @iIdCapacitacion OR 0 = @iIdCapacitacion)
 END
 
-
+GO
 
 /* ===================  Gestion Capacitacion ============================*/
+IF OBJECT_ID ( 'spGet_GESTION_CAPACITACION', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spGet_GESTION_CAPACITACION  
 Go
 CREATE PROCEDURE [spGet_GESTION_CAPACITACION]
 @iIdGestionCapacitacion int =0
@@ -25,6 +29,9 @@ GESTION_CAPACITACION
 where (iIdGestionCapacitacion = @iIdGestionCapacitacion OR 0 = @iIdGestionCapacitacion)
 END
 GO
+IF OBJECT_ID ( 'spInsertGESTION_CAPACITACION', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spInsertGESTION_CAPACITACION  
+GO  
 CREATE PROCEDURE [spInsertGESTION_CAPACITACION]
 
 @iIdCapacitacion int,
@@ -65,6 +72,10 @@ EXECUTE [dbo].[spInsertTEST] @iIdGestionCapacitacion,'',@dFechaRealizacionCapaci
 
 END
 GO
+
+IF OBJECT_ID ( 'spUpdateGESTION_CAPACITACION', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spUpdateGESTION_CAPACITACION  
+GO  
 CREATE PROCEDURE [spUpdateGESTION_CAPACITACION]
 @iIdGestionCapacitacion int,
 @iIdCapacitacion int,
@@ -98,6 +109,10 @@ END
 
 /* ===================  Proveedor ============================*/
 Go
+IF OBJECT_ID ( 'spGet_PROVEEDOR', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spGet_PROVEEDOR  
+GO  
+
 CREATE PROCEDURE [spGet_PROVEEDOR]
 @iIdProveedor int =0
 AS
@@ -115,6 +130,9 @@ END
 
 
 Go
+IF OBJECT_ID ( 'spGet_REPRESENTANTE', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spGet_REPRESENTANTE  
+GO  
 CREATE PROCEDURE [spGet_REPRESENTANTE]
 @iIdRepresentante int =0
 AS
@@ -126,6 +144,9 @@ where (iIdRepresentante = @iIdRepresentante or @iIdRepresentante=0)
 END
 
 GO
+IF OBJECT_ID ( 'spInsertREPRESENTANTE', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spInsertREPRESENTANTE  
+GO 
 CREATE PROCEDURE [spInsertREPRESENTANTE]
 @iIdProveedor int,
 @vNombreRepresentante varchar(200),
@@ -163,6 +184,9 @@ getdate()
 END
 
 GO
+IF OBJECT_ID ( 'spUpdateREPRESENTANTE', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spUpdateREPRESENTANTE  
+GO 
 CREATE PROCEDURE [spUpdateREPRESENTANTE]
 
 @iIdRepresentante int,
@@ -200,6 +224,9 @@ END
 /* ===================  test ============================*/
 
 Go
+IF OBJECT_ID ( 'spGet_TEST', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spGet_TEST  
+GO 
 CREATE PROCEDURE [spGet_TEST]
 @iIdTest int =0 
 AS
@@ -212,13 +239,15 @@ END
 
 
 GO
+IF OBJECT_ID ( 'spInsertTEST', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spInsertTEST  
+GO 
 CREATE PROCEDURE [spInsertTEST]
 @iIdGestorCapacitacion int,
 @vDescricionTest varchar(max),
 @dFechaTest date,
 @iEstadoTest int,
-@iUsuarioCrea int,
-@dFechaCrea datetime
+@iUsuarioCrea int
 AS
 BEGIN
 INSERT INTO 
@@ -241,16 +270,16 @@ getdate()
 END
 
 GO
+IF OBJECT_ID ( 'spUpdateTEST', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spUpdateTEST  
+GO 
 CREATE PROCEDURE [spUpdateTEST]
 @iIdTest int,
 @iIdGestorCapacitacion int,
 @vDescricionTest varchar(max),
 @dFechaTest date,
 @iEstadoTest int,
-@iUsuarioCrea int,
-@dFechaCrea datetime,
-@iUsuarioMod int,
-@dFechaMod datetime
+@iUsuarioMod int
 AS
 BEGIN
 UPDATE
@@ -270,6 +299,9 @@ END
 
 /* ===================  Gestion Pregunta ============================*/
 Go
+IF OBJECT_ID ( 'spGet_PREGUNTA', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spGet_PREGUNTA  
+GO 
 CREATE PROCEDURE [spGet_PREGUNTA]
 @iIdPregunta int =0
 AS
@@ -296,6 +328,9 @@ and iIdTest = @idtest
 END
 
 
+GO
+IF OBJECT_ID ( 'spInsertPREGUNTA', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spInsertPREGUNTA  
 GO
 CREATE PROCEDURE [spInsertPREGUNTA]
 @iIdTest int,
@@ -328,16 +363,16 @@ getdate()
 END
 
 GO
+IF OBJECT_ID ( 'spUpdatePREGUNTA', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spUpdatePREGUNTA  
+GO
 CREATE PROCEDURE [spUpdatePREGUNTA]
 @iIdPregunta int,
 @iIdTest int,
 @vEnunciadoPregunta varchar(max),
 @iPuntajePregunta int,
 @iTipoRespuestaPregunta int,
-@iUsuarioCrea int,
-@dFechaCrea datetime,
-@iUsuarioMod int,
-@dFechaMod datetime
+@iUsuarioMod int
 AS
 BEGIN
 UPDATE
@@ -359,6 +394,9 @@ END
 /* ===================  Gestion Opcion Pregunta ============================*/
 
 Go
+IF OBJECT_ID ( 'spGet_OPCION_PREGUNTA', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spGet_OPCION_PREGUNTA  
+GO
 CREATE PROCEDURE [spGet_OPCION_PREGUNTA]
 @iIdOpcion int =0
 AS
@@ -369,6 +407,9 @@ OPCION_PREGUNTA
 where (iIdOpcion = @iIdOpcion or @iIdOpcion=0)
 END
 
+GO
+IF OBJECT_ID ( 'spInsertOPCION_PREGUNTA', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spInsertOPCION_PREGUNTA  
 GO
 CREATE PROCEDURE [spInsertOPCION_PREGUNTA]
 @iIdPregunta int,
@@ -398,15 +439,15 @@ getdate()
 END
 
 GO
+IF OBJECT_ID ( 'spUpdateOPCION_PREGUNTA', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spUpdateOPCION_PREGUNTA  
+GO
 CREATE PROCEDURE [spUpdateOPCION_PREGUNTA]
 @iIdOpcion int,
 @iIdPregunta int,
 @vEnunciadoOpcion varchar(150),
 @iEstadoOpcion int,
-@iUsuarioCrea int,
-@dFechaCrea datetime,
-@iUsuarioMod int,
-@dFechaMod datetime
+@iUsuarioMod int
 AS
 BEGIN
 UPDATE
@@ -426,6 +467,9 @@ END
 /* ===================  Gestion Personal ============================*/
 
 Go
+IF OBJECT_ID ( 'spGet_PERSONAL', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spGet_PERSONAL  
+GO
 CREATE PROCEDURE [spGet_PERSONAL]
 @iIdPersonal int =0
 AS
@@ -436,6 +480,9 @@ PERSONAL
 where (iIdPersonal = @iIdPersonal or @iIdPersonal=0)
 END
 
+GO
+IF OBJECT_ID ( 'spInsertPERSONAL', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spInsertPERSONAL  
 GO
 CREATE PROCEDURE [spInsertPERSONAL]
 @vCodPersonal varchar(15),
@@ -484,6 +531,9 @@ getdate()
 END
 
 GO
+IF OBJECT_ID ( 'spUpdatePERSONAL', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spUpdatePERSONAL  
+GO
 CREATE PROCEDURE [spUpdatePERSONAL]
 @iIdPersonal int,
 @vCodPersonal varchar(15),
@@ -497,10 +547,7 @@ CREATE PROCEDURE [spUpdatePERSONAL]
 @iUbigeo int,
 @iTipoPersonal int,
 @iEstadoPersonal int,
-@iUsuarioCrea int,
-@dFechaCrea datetime,
-@iUsuarioMod int,
-@dFechaMod datetime
+@iUsuarioMod int
 AS
 BEGIN
 UPDATE
@@ -527,6 +574,9 @@ END
 /* ===================  Gestion Personal ============================*/
 
 Go
+IF OBJECT_ID ( 'spGet_EVALUACION_PROVEEDOR', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spGet_EVALUACION_PROVEEDOR  
+GO
 CREATE PROCEDURE [spGet_EVALUACION_PROVEEDOR]
 @iIdEvaluacionProveedor int =0
 AS
@@ -539,16 +589,16 @@ END
 
 
 GO
+IF OBJECT_ID ( 'spInsertEVALUACION_PROVEEDOR', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spInsertEVALUACION_PROVEEDOR  
+GO
 CREATE PROCEDURE [spInsertEVALUACION_PROVEEDOR]
 @iIdProveedor int,
 @iCalidadProducto int,
 @iPrecio int,
 @iCondiciones int,
 @dFechaEvaluacion date,
-@iUsuarioCrea int,
-@dFechaCrea datetime,
-@iUsuarioMod int,
-@dFechaMod datetime
+@iUsuarioCrea int
 AS
 BEGIN
 INSERT INTO 
@@ -573,6 +623,9 @@ getdate()
 END
 
 GO
+IF OBJECT_ID ( 'spUpdateEVALUACION_PROVEEDOR', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spUpdateEVALUACION_PROVEEDOR  
+GO
 CREATE PROCEDURE [spUpdateEVALUACION_PROVEEDOR]
 @iIdEvaluacionProveedor int,
 @iIdProveedor int,
@@ -580,10 +633,7 @@ CREATE PROCEDURE [spUpdateEVALUACION_PROVEEDOR]
 @iPrecio int,
 @iCondiciones int,
 @dFechaEvaluacion date,
-@iUsuarioCrea int,
-@dFechaCrea datetime,
-@iUsuarioMod int,
-@dFechaMod datetime
+@iUsuarioMod int
 AS
 BEGIN
 UPDATE
@@ -607,6 +657,9 @@ END
 /* ===================  Gestion Materia Prima ============================*/
 
 Go
+IF OBJECT_ID ( 'spGet_MATERIA_PRIMA', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spGet_MATERIA_PRIMA  
+GO
 CREATE PROCEDURE [spGet_MATERIA_PRIMA]
 @iIdMateriaPrima int =0
 AS
@@ -617,6 +670,9 @@ MATERIA_PRIMA
 where (iIdMateriaPrima = @iIdMateriaPrima or @iIdMateriaPrima=0)
 END
 
+GO
+IF OBJECT_ID ( 'spInsertMATERIA_PRIMA', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spInsertMATERIA_PRIMA  
 GO
 CREATE PROCEDURE [spInsertMATERIA_PRIMA]
 @vCodMateriaPrima varchar(15),
@@ -635,10 +691,7 @@ CREATE PROCEDURE [spInsertMATERIA_PRIMA]
 @vRequisitosPresentacion varchar(300),
 @vCondicionFisicaEntrega varchar(300),
 @vCondicionFisicaAlmacenamiento varchar(300),
-@iUsuarioCrea int,
-@dFechaCrea datetime,
-@iUsuarioMod int,
-@dFechaMod datetime
+@iUsuarioCrea int
 AS
 BEGIN
 INSERT INTO 
@@ -683,6 +736,9 @@ getdate()
 END
 
 GO
+IF OBJECT_ID ( 'spUpdateMATERIA_PRIMA', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spUpdateMATERIA_PRIMA  
+GO
 CREATE PROCEDURE [spUpdateMATERIA_PRIMA]
 @iIdMateriaPrima int,
 @vCodMateriaPrima varchar(15),
@@ -701,10 +757,7 @@ CREATE PROCEDURE [spUpdateMATERIA_PRIMA]
 @vRequisitosPresentacion varchar(300),
 @vCondicionFisicaEntrega varchar(300),
 @vCondicionFisicaAlmacenamiento varchar(300),
-@iUsuarioCrea int,
-@dFechaCrea datetime,
-@iUsuarioMod int,
-@dFechaMod datetime
+@iUsuarioMod int
 AS
 BEGIN
 UPDATE
@@ -736,6 +789,9 @@ END
 /* ===================  Gestion Materia Prima ============================*/
 
 Go
+IF OBJECT_ID ( 'spGet_EVALUACIONPROVEEDORPREGUNTA', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spGet_EVALUACIONPROVEEDORPREGUNTA  
+GO
 CREATE PROCEDURE [spGet_EVALUACIONPROVEEDORPREGUNTA]
 @iIdEvaluacionProveedorPregunta int =0
 AS
@@ -747,6 +803,9 @@ where (iIdEvaluacionProveedorPregunta = @iIdEvaluacionProveedorPregunta or @iIdE
 END
 
 GO
+IF OBJECT_ID ( 'spInsertEVALUACIONPROVEEDORPREGUNTA', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spInsertEVALUACIONPROVEEDORPREGUNTA  
+GO
 CREATE PROCEDURE [spInsertEVALUACIONPROVEEDORPREGUNTA]
 @iIdEvaluacionProveedor int,
 @iIdMateriaPrima int,
@@ -754,10 +813,7 @@ CREATE PROCEDURE [spInsertEVALUACIONPROVEEDORPREGUNTA]
 @dFecha date,
 @iPuntajeTotal int,
 @iPorcentajeCumplimiento int,
-@iUsuarioCrea int,
-@dFechaCrea datetime,
-@iUsuarioMod int,
-@dFechaMod datetime
+@iUsuarioCrea int
 AS
 BEGIN
 INSERT INTO 
@@ -784,6 +840,9 @@ GETDATE()
 END
 
 GO
+IF OBJECT_ID ( 'spUpdateEVALUACIONPROVEEDORPREGUNTA', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spUpdateEVALUACIONPROVEEDORPREGUNTA  
+GO
 CREATE PROCEDURE [spUpdateEVALUACIONPROVEEDORPREGUNTA]
 @iIdEvaluacionProveedorPregunta int,
 @iIdEvaluacionProveedor int,
@@ -792,10 +851,7 @@ CREATE PROCEDURE [spUpdateEVALUACIONPROVEEDORPREGUNTA]
 @dFecha date,
 @iPuntajeTotal int,
 @iPorcentajeCumplimiento int,
-@iUsuarioCrea int,
-@dFechaCrea datetime,
-@iUsuarioMod int,
-@dFechaMod datetime
+@iUsuarioMod int
 AS
 BEGIN
 UPDATE
@@ -818,6 +874,9 @@ END
 /* ===================  UBIGEO ============================*/
 
 Go
+IF OBJECT_ID ( 'spGetUBIGEOAll', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spGetUBIGEOAll  
+GO
 CREATE PROCEDURE [spGetUBIGEOAll]
 @vCodDpto INT=0,
 @vCodProv INT =0,
@@ -835,6 +894,9 @@ END
 
 
 Go
+IF OBJECT_ID ( 'spGet_CAPACITACION_PERSONAL', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spGet_CAPACITACION_PERSONAL  
+GO
 CREATE PROCEDURE [spGet_CAPACITACION_PERSONAL]
 @iIdCapacitacionPersonal INT =0 
 AS
@@ -844,6 +906,10 @@ FROM
 CAPACITACION_PERSONAL
 where (iIdCapacitacionPersonal = @iIdCapacitacionPersonal or @iIdCapacitacionPersonal = 0)
 END
+
+GO
+IF OBJECT_ID ( 'spInsertCAPACITACION_PERSONAL', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spInsertCAPACITACION_PERSONAL  
 GO
 CREATE PROCEDURE [spInsertCAPACITACION_PERSONAL]
 @iIdPersonal int,
@@ -896,6 +962,9 @@ GETDATE()
 END
 
 GO
+IF OBJECT_ID ( 'spUpdateCAPACITACION_PERSONAL', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spUpdateCAPACITACION_PERSONAL  
+GO
 CREATE PROCEDURE [spUpdateCAPACITACION_PERSONAL]
 @iIdCapacitacionPersonal int,
 @iIdPersonal int,
@@ -922,9 +991,7 @@ END
 
 /*  ================================================================= */
 
-USE [BDICARO]
-GO
-
+/*
 INSERT INTO [dbo].[CAPACITACION]
            ([vTemaCapacitacion]
            ,[dFechaPropuestaCapacitacion]
@@ -990,3 +1057,4 @@ INSERT INTO [dbo].[PERSONAL]
            ,2)
 GO
 
+*/

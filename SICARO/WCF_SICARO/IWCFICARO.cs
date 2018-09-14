@@ -15,6 +15,10 @@ namespace WCF_SICARO
     {
 
         [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "CAPACITACION", ResponseFormat = WebMessageFormat.Json)]
+        List<CAPACITACION_EL> GetAllCAPACITACION1();
+
+        [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "CAPACITACION", ResponseFormat = WebMessageFormat.Json)]
         List<CAPACITACION_EL> GetAllCAPACITACION(CAPACITACION_EL C);
         

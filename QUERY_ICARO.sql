@@ -35,6 +35,8 @@ iUsuarioMod int,
 dFechaMod datetime
 )
 go
+ALTER TABLE CAPACITACION ADD Longitud numeric(25,23) , Latitud numeric(25,23)  
+go
 
 CREATE TABLE PROVEEDOR
 (
