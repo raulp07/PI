@@ -141,5 +141,21 @@ namespace WCF_SICARO.Dominio
         }
         private DateTime _dFechaMod;
 
+        [DataMember]
+        public float nLatitud
+        {
+            get { return _nLatitud; }
+            set { _nLatitud = value; }
+        }
+        private float _nLatitud;
+
+        [DataMember]
+        public float nLongitud
+        {
+            get { return _nLongitud; }
+            set { _nLongitud = value; }
+        }
+        private float _nLongitud;
+
     }
 }

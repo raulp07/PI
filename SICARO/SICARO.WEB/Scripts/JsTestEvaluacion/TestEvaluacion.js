@@ -84,25 +84,43 @@ new Vue({
             var _Lista_Opciones = this.Lista_Opciones;
 
             var _puntaje = 0;
+            var _Detalle = [];
             $.each(_Lista_Preguntas, function (key, val) {
                 $.each(_Lista_Opciones, function (keyR, valR) {
                     if (val.iIdPregunta == valR.iIdPregunta) {
                         
                         var _optradio = $('input:radio[name=pregunta' + val.iIdPregunta + ']:checked').val();
                         _optradio = _optradio == undefined ? -1 : _optradio;
+                        var _SubDetalle = {};
                         if (valR.iEstadoOpcion == _optradio) {
                             _puntaje = _puntaje + val.iPuntajePregunta;
+                            _SubDetalle = {
+                                "iIdPregunta": valR.iIdPregunta,
+                                "iIdOpcion": valR.iIdOpcion,
+                                "iEstadoRespuesta":1,
+                            }
+                        } else {
+                            _SubDetalle = {
+                                "iIdPregunta": valR.iIdPregunta,
+                                "iIdOpcion": valR.iIdOpcion,
+                                "iEstadoRespuesta": 0,
+                            }
                         }
+                        _Detalle.push(_SubDetalle);
                     }
                 });
             });
+            debugger;
             var parametros = {
                 iPuntajePersonal: _puntaje
             }
+
+            var jsonData = { parametros: parametros, Detalle_Capacitacion: _Detalle };
+
             $('#PMuestra').addClass('hide');
                     $('#PTest').addClass('hide');
                     $('#PFinal').removeClass('hide');
-            axios.post("/TestEvaluacion/RegistrarTest/", parametros).then(function (response) {
+            axios.post("/TestEvaluacion/RegistrarTest/", jsonData).then(function (response) {
                 if (response.data.respuesta>0) {
                     alert("Se grabo correctamente la respuesta");
                 }

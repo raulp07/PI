@@ -166,6 +166,21 @@ dFechaMod datetime
 )
 go
 
+CREATE TABLE DETALLE_CAPACITACION_PERSONAL
+(
+iIdDetalleCapacitacionPersonal int identity primary key ,
+iIdCapacitacionPersonal int FOREIGN KEY references CAPACITACION_PERSONAL(iIdCapacitacionPersonal),
+iIdPregunta int FOREIGN KEY references PREGUNTA(iIdPregunta),
+iIdOpcion int FOREIGN KEY references OPCION_PREGUNTA(iIdOpcion),
+iEstadoRespuesta int,
+iUsuarioCrea int,
+dFechaCrea datetime,
+iUsuarioMod int,
+dFechaMod datetime
+)
+go
+
+
 
 CREATE TABLE EVALUACION_PROVEEDOR
 (
@@ -219,6 +234,134 @@ vObservacion varchar(MAX),
 dFecha date,
 iPuntajeTotal int,
 iPorcentajeCumplimiento int,
+iUsuarioCrea int,
+dFechaCrea datetime,
+iUsuarioMod int,
+dFechaMod datetime
+)
+go
+
+--tablas nuevas
+
+
+
+CREATE TABLE RECEPCIONMATERIAPRIMA
+(
+idRecepcionMateriaPrima int primary key identity,
+idMateriaPrima int FOREIGN KEY references MATERIA_PRIMA(iIdMateriaPrima),
+idProveedor int Foreign key references PROVEEDOR(iIdProveedor) ,
+guiaRemision varchar(MAX),
+fechaSolicitada datetime,
+fechaRecepcionSolicitada datetime,
+loteMateriaPrima varchar(MAX),
+unidadDeMedida varchar(MAX),
+pesoPermitido int,
+fechaVencimiento datetime,
+mermaMateriaPrima int,
+pesoRealMateriaPrima int
+)
+go
+
+
+CREATE TABLE ENTRADASALIDAMATERIAPRIMA
+(
+idEntradaSalidaMateriaPrima int primary key identity,
+idMateriaPrima int FOREIGN KEY references MATERIA_PRIMA(iIdMateriaPrima),
+idProveedor int Foreign key references PROVEEDOR(iIdProveedor),
+fecha datetime,
+loteMateriaPrima varchar(MAX),
+fechaVencimiento datetime,
+unidadDeMedida varchar(MAX),
+stockInicial int,
+ingreso int,
+despacho int,
+stockFinal int
+)
+go
+
+CREATE TABLE CONTROLPRODUCCION
+(
+idProducto int primary key identity,
+fechaProduccion datetime,
+cantidadProducida int,
+idActividadControlProduccion int,
+)
+go
+
+CREATE TABLE ACTIVIDADCONTROLPRODUCCION
+(
+idactividadControlProduccion int primary key identity,
+tiempoInicialPesado datetime,
+tiempoFinalPesado datetime,
+tiempoInicialMezclado1 datetime,
+tiempoFinalMezclado1 datetime,
+tiempoInicialMezclado2 datetime,
+tiempoFinalMezclado2 datetime,
+tiempoInicialMezclado3 datetime,
+tiempoFinalMezclado3 datetime,
+tiempoInicialReposo datetime,
+tiempoFinalReposo datetime,
+tiempoInicialFiltrado datetime,
+tiempoFinalFiltrado datetime,
+tiempoInicialLlenado datetime,
+tiempoFinalLlenado datetime,
+tiempoInicialEncajonado datetime,
+tiempoFinalEncajonado datetime
+)
+go
+
+--------------------------------------------------------------
+------- TABLAS PARA REGISTRO DEL HISTORICO DE PRONOSTICO -----
+--------------------------------------------------------------
+
+
+CREATE TABLE PRONOSTICO
+(
+idPronostico int primary key identity,
+tipoPronostico varchar(MAX),
+idProveedor int Foreign key references PROVEEDOR(iIdProveedor),
+idProducto int,
+idInsumo int,
+idActividadProduccion int,
+cantidad int,
+unidadDeMedida varchar(MAX) 
+)
+
+-- Tablas Producto Detalle
+
+go
+
+CREATE TABLE PROVEEDOR_MATERIAPRIMA
+(
+iIdProveedor int Foreign key references PROVEEDOR(iIdProveedor),
+iIdMateriaPrima int FOREIGN KEY references MATERIA_PRIMA(iIdMateriaPrima),
+dFechaEvaluacion datetime,
+iUsuarioCrea int,
+dFechaCrea datetime,
+iUsuarioMod int,
+dFechaMod datetime
+)
+
+GO
+
+CREATE TABLE PRODUCTO
+(
+iIdproducto int primary key identity,
+vCodproducto AS 'PR' + RIGHT('000000' + CAST(iIdproducto AS VARCHAR(10)), 6) PERSISTED,
+vNombreProducto varchar(MAX),
+iUsuarioCrea int,
+dFechaCrea datetime,
+iUsuarioMod int,
+dFechaMod datetime
+)
+
+GO
+
+CREATE TABLE PRODUCTO_MATERIAPRIMA
+(
+iIdproducto int Foreign key references PRODUCTO(iIdproducto),
+iIdMateriaPrima int FOREIGN KEY references MATERIA_PRIMA(iIdMateriaPrima),
+dFechaEvaluacion datetime,
 iUsuarioCrea int,
 dFechaCrea datetime,
 iUsuarioMod int,

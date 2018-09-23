@@ -128,6 +128,19 @@ namespace SICARO.WEB.Models
             set { _dFechaMod = value; }
         }
         private DateTime _dFechaMod;
-
+        
+        public float nLatitud
+        {
+            get { return _nLatitud; }
+            set { _nLatitud = value; }
+        }
+        private float _nLatitud;
+        
+        public float nLongitud
+        {
+            get { return _nLongitud; }
+            set { _nLongitud = value; }
+        }
+        private float _nLongitud;
     }
 }

@@ -40,9 +40,16 @@ CREATE PROCEDURE [spInsertGESTION_CAPACITACION]
 @tHoraInicio time,
 @tHoraFin time,
 @iTiempoTest int,
-@iUsuarioCrea int
+@iUsuarioCrea int,
+@nLatitud numeric(25,23),
+@nLongitud numeric(25,23)
 AS
 BEGIN
+
+update capacitacion set Latitud = @nLatitud,
+						Longitud = @nLongitud
+		where iIdCapacitacion = @iIdCapacitacion
+
 INSERT INTO 
 GESTION_CAPACITACION(
 iIdCapacitacion,
@@ -990,6 +997,119 @@ iIdCapacitacionPersonal = @iIdCapacitacionPersonal
 END
 
 /*  ================================================================= */
+
+/* =================== DETALLE CAPACITACION PERSONAL =================*/
+
+GO
+IF OBJECT_ID ( 'spGetDETALLE_CAPACITACION_PERSONAL', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spGetDETALLE_CAPACITACION_PERSONAL  
+GO
+CREATE PROCEDURE [spGetDETALLE_CAPACITACION_PERSONAL]
+(
+@iIdDetalleCapacitacionPersonal int = 0
+)
+AS
+BEGIN
+SELECT *
+FROM
+DETALLE_CAPACITACION_PERSONAL
+where (iIdDetalleCapacitacionPersonal = @iIdDetalleCapacitacionPersonal or @iIdDetalleCapacitacionPersonal = 0)
+END
+
+GO
+IF OBJECT_ID ( 'spInsertDETALLE_CAPACITACION_PERSONAL', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spInsertDETALLE_CAPACITACION_PERSONAL  
+GO
+CREATE PROCEDURE [spInsertDETALLE_CAPACITACION_PERSONAL]
+@iIdCapacitacionPersonal int,
+@iIdPregunta int,
+@iIdOpcion int,
+@iEstadoRespuesta int,
+@iUsuarioCrea int
+AS
+BEGIN
+
+set @iIdCapacitacionPersonal = (select max(iIdCapacitacionPersonal) from CAPACITACION_PERSONAL)
+
+INSERT INTO 
+DETALLE_CAPACITACION_PERSONAL(
+iIdCapacitacionPersonal,
+iIdPregunta,
+iIdOpcion,
+iEstadoRespuesta,
+iUsuarioCrea,
+dFechaCrea
+)
+VALUES (
+@iIdCapacitacionPersonal,
+@iIdPregunta,
+@iIdOpcion,
+@iEstadoRespuesta,
+@iUsuarioCrea,
+getdate()
+)
+END
+
+GO
+IF OBJECT_ID ( 'spUpdateDETALLE_CAPACITACION_PERSONAL', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spUpdateDETALLE_CAPACITACION_PERSONAL  
+GO
+CREATE PROCEDURE [spUpdateDETALLE_CAPACITACION_PERSONAL]
+@iIdDetalleCapacitacionPersonal int,
+@iIdCapacitacionPersonal int,
+@iIdPregunta int,
+@iIdOpcion int,
+@iEstadoRespuesta int,
+@iUsuarioMod int
+AS
+BEGIN
+UPDATE
+DETALLE_CAPACITACION_PERSONAL
+SET
+iIdCapacitacionPersonal = @iIdCapacitacionPersonal,
+iIdPregunta = @iIdPregunta,
+iIdOpcion = @iIdOpcion,
+iEstadoRespuesta = @iEstadoRespuesta,
+iUsuarioMod = @iUsuarioMod,
+dFechaMod = getdate()
+WHERE
+iIdDetalleCapacitacionPersonal = @iIdDetalleCapacitacionPersonal
+END
+
+GO
+/*  ================================================================= */
+
+--Servicios
+
+
+IF OBJECT_ID ( 'ListaServicioCircular', 'P' ) IS NOT NULL   
+    DROP PROCEDURE ListaServicioCircular  
+GO
+create proc ListaServicioCircular
+as
+
+begin
+select 'Aprovados' as 'titulo',count(*) 'Aciertos' from CAPACITACION_PERSONAL
+where ipuntajepersonal >=12
+union
+select 'Desaprovados' as 'titulo',count(*) 'Aciertos' from CAPACITACION_PERSONAL
+where ipuntajepersonal <12
+union
+select t1.titulo, t1.Aciertos from
+(select top 1 p.vEnunciadoPregunta as 'titulo', sum(iestadoRespuesta) 'Aciertos' from DETALLE_CAPACITACION_PERSONAL dcp
+inner join pregunta p on dcp.iidpregunta= p.iidpregunta
+group by p.vEnunciadoPregunta
+order by sum(iestadoRespuesta) desc) t1
+union
+select t2.titulo, t2.Aciertos from
+(select top 1 p.vEnunciadoPregunta as 'titulo', sum(iestadoRespuesta) 'Aciertos' from DETALLE_CAPACITACION_PERSONAL dcp
+inner join pregunta p on dcp.iidpregunta= p.iidpregunta
+group by p.vEnunciadoPregunta
+order by sum(iestadoRespuesta) asc) t2
+end
+
+
+
 
 /*
 INSERT INTO [dbo].[CAPACITACION]

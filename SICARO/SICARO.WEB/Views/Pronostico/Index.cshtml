@@ -1,0 +1,177 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div id="app">
+    <br /><br />
+    <div class="row text-center">
+        <h2>GESTIONAR INDICADORES DE PRONOSTICO</h2>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-sm-5">
+                <label class="">Seleccione Pronostico:</label>
+            </div>
+            <div class="col-sm-5 form-group ">
+                <select class="form-control" id="Consulta">
+                    <option>Seleccione</option>
+                    <option>Pronosticar duración de insumo pre-stock</option>
+                    <option>Pronosticar tiempo de arribo de insumo</option>
+                    <option>Pronosticar tiempo de actividades en producción</option>
+                    <option>Pronosticar merma de insumo solicitado por proveedor</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-sm-5">
+                <label class="">Producto:</label>
+            </div>
+            <div class="col-sm-5 form-group ">
+                <select class="form-control" id="Consulta">
+                    <option>Seleccione</option>
+                    <option>Pronosticar duración de insumo pre-stock</option>
+                    <option>Pronosticar tiempo de arribo de insumo</option>
+                    <option>Pronosticar tiempo de actividades en producción</option>
+                    <option>Pronosticar merma de insumo solicitado por proveedor</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-sm-5">
+                <label class="">Proveedor:</label>
+            </div>
+            <div class="col-sm-5 form-group ">
+                <select class="form-control" id="Consulta">
+                    <option>Seleccione</option>
+                    <option>Pronosticar duración de insumo pre-stock</option>
+                    <option>Pronosticar tiempo de arribo de insumo</option>
+                    <option>Pronosticar tiempo de actividades en producción</option>
+                    <option>Pronosticar merma de insumo solicitado por proveedor</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4  text-center">
+            <input type="button" class="btn" value="MOSTRAR INDICADOR" />
+        </div>
+        <div class="col-sm-4  text-center">
+            <input type="button" class="btn" value="ACTUALIZAR INTERVALOS" v-on:click="MostrarConfiguracionIntervalo" />
+        </div>
+        <div class="col-sm-4  text-center">
+            <input type="button" class="btn" value="SALIR" />
+        </div>
+    </div>
+    <br />
+    <div class="row" id="ConfiguracionIntervalos" style="display:none">
+        <div class="col-sm-12">
+            <label>Indicadores:</label>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3 text-center">
+                <label>Intervalo de:</label>
+            </div>
+            <div class="col-sm-3 text-center">
+                <label>Alarma</label>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-3">
+                <label>Rojo</label>
+            </div>
+            <div class="col-sm-3">
+                <input type="text" id="txtintervaloriniRojo" class="form-control" />
+            </div>
+            <div class="col-sm-3">
+                <input type="text" id="txtintervaloriniRojo" class="form-control" />
+            </div>
+            <div class="col-sm-3 text-center">
+                <label class="radio-inline"><input type="radio" name="optradioRojo" checked>Si</label>
+                <label class="radio-inline"><input type="radio" name="optradioRojo">No</label>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-3">
+                <label>Amarillo</label>
+            </div>
+            <div class="col-sm-3">
+                <input type="text" id="txtintervaloriniAmarillo" class="form-control" />
+            </div>
+            <div class="col-sm-3">
+                <input type="text" id="txtintervaloriniAmarillo" class="form-control" />
+            </div>
+            <div class="col-sm-3 text-center">
+                <label class="radio-inline"><input type="radio" name="optradioAmarillo" checked>Si</label>
+                <label class="radio-inline"><input type="radio" name="optradioAmarillo">No</label>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-3">
+                <label>Verde</label>
+            </div>
+            <div class="col-sm-3">
+                <input type="text" id="txtintervaloriniVerde" class="form-control" />
+            </div>
+            <div class="col-sm-3">
+                <input type="text" id="txtintervaloriniVerde" class="form-control" />
+            </div>
+            <div class="col-sm-3 text-center">
+                <label class="radio-inline"><input type="radio" name="optradioVerde" checked>Si</label>
+                <label class="radio-inline"><input type="radio" name="optradioVerde">No</label>
+            </div>
+        </div>
+        <br />
+        <div class="row text-center">
+            <input type="button" value="Guardar" class="btn" v-on:click="OcultarConfiguracionIntervalo"/>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-2">
+            <div id="chart_div" class="text-center"></div>
+        </div>
+        <div class="col-sm-6">
+            <table class="table tab-content">
+                <thead>
+                    <tr>
+                        <td>Fecha</td>
+                        <td>Indicador</td>
+                        <td>Pronostico</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>12/06/18</td>
+                        <td>Rojo</td>
+                        <td>14 dias</td>
+                    </tr>
+                    <tr>
+                        <td>12/06/18</td>
+                        <td>Verde</td>
+                        <td>14 dias</td>
+                    </tr>
+                    <tr>
+                        <td>12/06/18</td>
+                        <td>Amarillo</td>
+                        <td>14 dias</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="~/Scripts/JsPronostico/Pronostico.js"></script>

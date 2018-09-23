@@ -83,6 +83,8 @@ namespace WCF_SICARO.Persistencia
                     com.Parameters.Add("@tHoraFin", SqlDbType.Time).Value = GC.tHoraFin;
                     com.Parameters.Add("@iTiempoTest", SqlDbType.Int).Value = GC.iTiempoTest;
                     com.Parameters.Add("@iUsuarioCrea", SqlDbType.Int).Value = GC.iUsuarioCrea;
+                    com.Parameters.Add("@nLatitud", SqlDbType.Float).Value = GC.nLatitud;
+                    com.Parameters.Add("@nLongitud", SqlDbType.Float).Value = GC.nLongitud;
 
                     return com.ExecuteNonQuery();
                 }

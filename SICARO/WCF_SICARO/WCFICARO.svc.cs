@@ -124,7 +124,7 @@ namespace WCF_SICARO
         }
         //================================================================
 
-        // PROVEEDOR ==================================================
+        // CAPACITACION PERSONAL =========================================
         public List<CAPACITACION_PERSONAL_EL> GetAllCAPACITACION_PERSONAL(CAPACITACION_PERSONAL_EL CP) {
             return CAPACITACION_PERSONAL_DA.Accion.GetAllCAPACITACION_PERSONAL(CP);
         }
@@ -136,7 +136,30 @@ namespace WCF_SICARO
         }
         //================================================================
 
+        // DETALLE CAPACITACION PERSONAL =========================================
+        public List<DETALLE_CAPACITACION_PERSONAL_EL> GetAllDETALLECAPACITACIONPERSONAL(DETALLE_CAPACITACION_PERSONAL_EL CP)
+        {
+            return DETALLE_CAPACITACION_PERSONAL_DA.Accion.GetAllDETALLECAPACITACIONPERSONAL(CP);
+        }
+        public int InsertDETALLE_CAPACITACION_PERSONAL(DETALLE_CAPACITACION_PERSONAL_EL CP)
+        {
+            return DETALLE_CAPACITACION_PERSONAL_DA.Accion.InsertDETALLE_CAPACITACION_PERSONAL(CP);
+        }
+        public int UpdateDETALLE_CAPACITACION_PERSONAL(DETALLE_CAPACITACION_PERSONAL_EL CP)
+        {
+            return DETALLE_CAPACITACION_PERSONAL_DA.Accion.UpdateDETALLE_CAPACITACION_PERSONAL(CP);
+        }
+        //================================================================
 
+        public List<ElementosSaliente> GetAllDETALLECAPACITACIONPERSONALSERVICIO()
+        {
+            return DETALLE_CAPACITACION_PERSONAL_DA.Accion.GetAllDETALLECAPACITACIONPERSONALSERVICIO();
+        }
+
+        public List<PREGUNTAS_CORRECTAS> GetPREGUNTAS_CORRECTAS()
+        {
+            return DETALLE_CAPACITACION_PERSONAL_DA.Accion.GetPREGUNTAS_CORRECTAS();
+        }
 
     }
 }

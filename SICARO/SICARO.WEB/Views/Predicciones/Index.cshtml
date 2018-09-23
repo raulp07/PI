@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<div id="app">
+    <br /><br />
+    <div class="row text-center">
+        <h2>PRONOSTICAR EVENTOS DE PRODUCCIÓN</h2>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-sm-5">
+                <label class="">Seleccione Pronostico:</label>
+            </div>
+            <div class="col-sm-5 form-group ">
+                <select class="form-control" id="Consulta">
+                    <option>Pronosticar Duración de insumo pre-stock</option>
+                    <option>Pronosticar tiempo de arribo de insumo</option>
+                    <option>Pronosticar tiempo de actividades en producción</option>
+                    <option>Pronosticar merma de insumo solicitado</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-sm-5">
+                <label class="">Producto:</label>
+            </div>
+            <div class="col-sm-5 form-group ">
+                <select class="form-control" id="slProducto">
+                    <option value="0">Seleccione</option>
+                    <option>Azucar</option>
+                    <option>Pronosticar tiempo de actividades en producción</option>
+                    <option>Pronosticar merma de insumo solicitado</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-sm-5">
+                <label class="">Proveedor:</label>
+            </div>
+            <div class="col-sm-5 form-group ">
+                <select class="form-control" id="slProducto">
+                    <option value="0">Seleccione</option>
+                    <option>Azucar</option>
+                    <option>Pronosticar tiempo de actividades en producción</option>
+                    <option>Pronosticar merma de insumo solicitado</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-sm-5">
+                <label class="">Unidad de Medida:</label>
+            </div>
+            <div class="col-sm-5 form-group ">
+                <select class="form-control" id="slProducto">
+                    <option>Seleccione</option>
+                    <option>Pronosticar tiempo de arribo de insumo</option>
+                    <option>Pronosticar tiempo de actividades en producción</option>
+                    <option>Pronosticar merma de insumo solicitado</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-sm-5">
+                <label class="">Unidad de Peso:</label>
+            </div>
+            <div class="col-sm-5 form-group ">
+                <select class="form-control" id="slProducto">
+                    <option value="0">Seleccione</option>
+                    <option>Pronosticar tiempo de arribo de insumo</option>
+                    <option>Pronosticar tiempo de actividades en producción</option>
+                    <option>Pronosticar merma de insumo solicitado</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="row">
+        <div class="col-sm-7 col-sm-offset-2 form-group">
+            <div class="col-sm-12 ">
+                <div class="col-sm-3 form-group">
+                    <label class="">Error Medio Cuadrático:</label>
+                </div>
+                <div class="col-sm-9 form-group">
+
+                    <input type="text" id="txtErrorC" class="form-control" />
+                </div>
+            </div>
+            <br /><br />
+            <div class="col-sm-12 text-center">
+                <div id="columnchart_values" style="width: 300px; height: 250px;"></div>
+            </div>
+        </div>
+        <div class="col-sm-3 form-group ">
+            <div class="row form-group">
+                <label>La Predicción es:</label>
+                <label></label>
+            </div>
+            <br /><br />
+            <div class="row">
+                <input type="button" class="btn" value="Gestionar Indicadores" />
+            </div>
+            <br />
+            <div class="row">
+                <input type="button" class="btn" value="Pronosticar" />
+            </div>
+            <br />
+            <div class="row">
+                <input type="button" class="btn" value="Salir" />
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>
+
+
+<script src="~/Scripts/JsPredicciones/Predicciones.js"></script>

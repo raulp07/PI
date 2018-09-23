@@ -199,3 +199,4 @@ D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB\bin\es\Microsoft.Owin.Security.Twitter.
 D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
 D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB\obj\Debug\SICARO.WEB.dll
 D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB\obj\Debug\SICARO.WEB.pdb
+D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB\obj\Debug\SICARO.WEB.csprojResolveAssemblyReference.cache
