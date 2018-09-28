@@ -16,7 +16,7 @@
                 <label class="">Seleccione Pronostico:</label>
             </div>
             <div class="col-sm-5 form-group ">
-                <select class="form-control" id="Consulta">
+                <select class="form-control" id="Consulta" v-on:change="ModificarConulta">
                     <option>Seleccione</option>
                     <option>Pronosticar duración de insumo pre-stock</option>
                     <option>Pronosticar tiempo de arribo de insumo</option>
@@ -32,28 +32,42 @@
                 <label class="">Producto:</label>
             </div>
             <div class="col-sm-5 form-group ">
-                <select class="form-control" id="Consulta">
-                    <option>Seleccione</option>
-                    <option>Pronosticar duración de insumo pre-stock</option>
-                    <option>Pronosticar tiempo de arribo de insumo</option>
-                    <option>Pronosticar tiempo de actividades en producción</option>
-                    <option>Pronosticar merma de insumo solicitado por proveedor</option>
+                <select class="form-control" id="slProducto" v-on:change="ConsultarProveedor()">
+                    <option value="0">Seleccione</option>
+                    <option v-for="lista in Lista_Materia_Prima" v-bind:value="lista.iIdMateriaPrima">{{lista.vNombreMateriaPrima}}</option>
                 </select>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row divproveedor">
         <div class="col-sm-6 col-sm-offset-3">
             <div class="col-sm-5">
                 <label class="">Proveedor:</label>
             </div>
             <div class="col-sm-5 form-group ">
-                <select class="form-control" id="Consulta">
-                    <option>Seleccione</option>
-                    <option>Pronosticar duración de insumo pre-stock</option>
-                    <option>Pronosticar tiempo de arribo de insumo</option>
-                    <option>Pronosticar tiempo de actividades en producción</option>
-                    <option>Pronosticar merma de insumo solicitado por proveedor</option>
+                <select class="form-control" id="slProveedor">
+                    <option value="0">Seleccione</option>
+                    <option v-for="lista in Lista_Proveedor" v-bind:value="lista.iIdProveedor">{{lista.vNombreProveedor}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row hide divActividad">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-sm-5">
+                <label class="">Actividad de producción:</label>
+            </div>
+            <div class="col-sm-5 form-group ">
+                <select class="form-control" id="slActividad">
+                    <option value="0">Seleccione</option>
+                    <option value="11">Pesado</option>
+                    <option value="12">Mezclado 1</option>
+                    <option value="13">Mezclado 2</option>
+                    <option value="14">Mezclado 3</option>
+                    <option value="15">Reposo</option>
+                    <option value="16">Filtrado</option>
+                    <option value="17">Llenado</option>
+                    <option value="18">Encajonado</option>
                 </select>
             </div>
         </div>
@@ -61,7 +75,7 @@
 
     <div class="row">
         <div class="col-sm-4  text-center">
-            <input type="button" class="btn" value="MOSTRAR INDICADOR" />
+            <input type="button" class="btn" value="MOSTRAR INDICADOR" v-on:click="GuardarControlProduccion" />
         </div>
         <div class="col-sm-4  text-center">
             <input type="button" class="btn" value="ACTUALIZAR INTERVALOS" v-on:click="MostrarConfiguracionIntervalo" />
@@ -89,10 +103,10 @@
                 <label>Rojo</label>
             </div>
             <div class="col-sm-3">
-                <input type="text" id="txtintervaloriniRojo" class="form-control" />
+                <input type="text" id="txtintervaloriniRojo" class="form-control" v-Model="RedInicio"/>
             </div>
             <div class="col-sm-3">
-                <input type="text" id="txtintervaloriniRojo" class="form-control" />
+                <input type="text" id="txtintervaloriniRojo" class="form-control" v-Model="RedFin"/>
             </div>
             <div class="col-sm-3 text-center">
                 <label class="radio-inline"><input type="radio" name="optradioRojo" checked>Si</label>
@@ -105,10 +119,10 @@
                 <label>Amarillo</label>
             </div>
             <div class="col-sm-3">
-                <input type="text" id="txtintervaloriniAmarillo" class="form-control" />
+                <input type="text" id="txtintervaloriniAmarillo" class="form-control" v-Model="YellowInicio"/>
             </div>
             <div class="col-sm-3">
-                <input type="text" id="txtintervaloriniAmarillo" class="form-control" />
+                <input type="text" id="txtintervaloriniAmarillo" class="form-control" v-Model="YellowFin"/>
             </div>
             <div class="col-sm-3 text-center">
                 <label class="radio-inline"><input type="radio" name="optradioAmarillo" checked>Si</label>
@@ -121,10 +135,10 @@
                 <label>Verde</label>
             </div>
             <div class="col-sm-3">
-                <input type="text" id="txtintervaloriniVerde" class="form-control" />
+                <input type="text" id="txtintervaloriniVerde" class="form-control" v-Model="GreenInicio"/>
             </div>
             <div class="col-sm-3">
-                <input type="text" id="txtintervaloriniVerde" class="form-control" />
+                <input type="text" id="txtintervaloriniVerde" class="form-control" v-Model="GreenFin"/>
             </div>
             <div class="col-sm-3 text-center">
                 <label class="radio-inline"><input type="radio" name="optradioVerde" checked>Si</label>
@@ -151,20 +165,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>12/06/18</td>
-                        <td>Rojo</td>
-                        <td>14 dias</td>
-                    </tr>
-                    <tr>
-                        <td>12/06/18</td>
-                        <td>Verde</td>
-                        <td>14 dias</td>
-                    </tr>
-                    <tr>
-                        <td>12/06/18</td>
-                        <td>Amarillo</td>
-                        <td>14 dias</td>
+                    <tr v-for="lista in Lista_Control_Produccion">
+                        <td>{{lista.fechaProduccion}}</td>
+                        <td>{{lista.indicador}}</td>
+                        <td>{{lista.cantidadProducida}}</td>
                     </tr>
                 </tbody>
             </table>

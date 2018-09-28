@@ -161,5 +161,44 @@ namespace WCF_SICARO
             return DETALLE_CAPACITACION_PERSONAL_DA.Accion.GetPREGUNTAS_CORRECTAS();
         }
 
+
+        // MATERIA PRIMA =========================================
+
+        public List<MATERIA_PRIMA_EL> GetAllMATERIA_PRIMA(MATERIA_PRIMA_EL MP) {
+            return MATERIA_PRIMA_DA.Accion.GetAllMATERIA_PRIMA(MP);
+        }
+
+        //================================================================
+
+        // PRONOSTICO  =========================================
+        public List<PRONOSTICO_EL> GetPRONOSTICOAll(PRONOSTICO_EL CP)
+        {
+            return PRONOSTICO_DA.Accion.GetPRONOSTICOAll(CP);
+        }
+        public int InsertPRONOSTICO(PRONOSTICO_EL CP)
+        {
+            return PRONOSTICO_DA.Accion.InsertPRONOSTICO(CP);
+        }
+        public int UpdatePRONOSTICO(PRONOSTICO_EL CP)
+        {
+            return PRONOSTICO_DA.Accion.UpdatePRONOSTICO(CP);
+        }
+        //================================================================
+
+        // CONTROL PRODUCCION  =========================================
+        public List<CONTROLPRODUCCION_EL> GetCONTROLPRODUCCIONAll(CONTROLPRODUCCION_EL CP)
+        {
+            return CONTROLPRODUCCION_DA.Accion.GetCONTROLPRODUCCIONAll(CP);
+        }
+        public int InsertCONTROLPRODUCCION(CONTROLPRODUCCION_EL CP)
+        {
+            return CONTROLPRODUCCION_DA.Accion.InsertCONTROLPRODUCCION(CP);
+        }
+        public int UpdateCONTROLPRODUCCION(CONTROLPRODUCCION_EL CP)
+        {
+            return CONTROLPRODUCCION_DA.Accion.UpdateCONTROLPRODUCCION(CP);
+        }
+        //================================================================
+        
     }
 }

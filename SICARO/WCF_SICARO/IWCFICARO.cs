@@ -129,6 +129,35 @@ namespace WCF_SICARO
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "GetAllPREGUNTASCORRECTAS", ResponseFormat = WebMessageFormat.Json)]
         List<PREGUNTAS_CORRECTAS> GetPREGUNTAS_CORRECTAS();
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "MATERIA_PRIMA", ResponseFormat = WebMessageFormat.Json)]
+        List<MATERIA_PRIMA_EL> GetAllMATERIA_PRIMA(MATERIA_PRIMA_EL MP);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "PRONOSTICO", ResponseFormat = WebMessageFormat.Json)]
+        List<PRONOSTICO_EL> GetPRONOSTICOAll(PRONOSTICO_EL CP);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "IPRONOSTICO", ResponseFormat = WebMessageFormat.Json)]
+        int InsertPRONOSTICO(PRONOSTICO_EL CP);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "UPRONOSTICO", ResponseFormat = WebMessageFormat.Json)]
+        int UpdatePRONOSTICO(PRONOSTICO_EL CP);
+
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "CONTROLPRODUCCION", ResponseFormat = WebMessageFormat.Json)]
+        List<CONTROLPRODUCCION_EL> GetCONTROLPRODUCCIONAll(CONTROLPRODUCCION_EL CP);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "ICONTROLPRODUCCION", ResponseFormat = WebMessageFormat.Json)]
+        int InsertCONTROLPRODUCCION(CONTROLPRODUCCION_EL CP);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "UCONTROLPRODUCCION", ResponseFormat = WebMessageFormat.Json)]
+        int UpdateCONTROLPRODUCCION(CONTROLPRODUCCION_EL CP);
     }
 
 

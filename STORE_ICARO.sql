@@ -120,16 +120,19 @@ IF OBJECT_ID ( 'spGet_PROVEEDOR', 'P' ) IS NOT NULL
     DROP PROCEDURE spGet_PROVEEDOR  
 GO  
 
-CREATE PROCEDURE [spGet_PROVEEDOR]
-@iIdProveedor int =0
+CREATE PROCEDURE [spGet_PROVEEDOR] 
+@iIdProveedor int =0,
+@iIdMateriaPrima int =0
 AS
 BEGIN
-SELECT *
-FROM
-PROVEEDOR
-where (iIdProveedor = @iIdProveedor or @iIdProveedor=0) 
-END
 
+
+SELECT p.*
+FROM
+PROVEEDOR p
+inner join PROVEEDOR_MATERIAPRIMA PM on p.iIdProveedor = PM.iIdProveedor
+where (p.iIdProveedor = @iIdProveedor or @iIdProveedor=0) and (PM.iIdMateriaPrima = @iIdMateriaPrima or @iIdMateriaPrima=0)
+END
 
 /*  ================================================================= */
 
@@ -1109,6 +1112,157 @@ order by sum(iestadoRespuesta) asc) t2
 end
 
 
+Go
+IF OBJECT_ID ( 'spGetPRONOSTICOAll', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spGetPRONOSTICOAll  
+GO
+CREATE PROCEDURE [spGetPRONOSTICOAll]
+@idPronostico int =0
+AS
+BEGIN
+SELECT *
+FROM
+PRONOSTICO
+where (idPronostico = @idPronostico or @idPronostico = 0)
+END
+
+GO
+IF OBJECT_ID ( 'spInsertPRONOSTICO', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spInsertPRONOSTICO  
+GO
+CREATE PROCEDURE [spInsertPRONOSTICO]
+@tipoPronostico varchar(max),
+@idProveedor int,
+@idProducto int,
+@idInsumo int,
+@idActividadProduccion int,
+@cantidad int,
+@unidadDeMedida varchar(max)
+AS
+BEGIN
+INSERT INTO 
+PRONOSTICO(
+tipoPronostico,
+idProveedor,
+idProducto,
+idInsumo,
+idActividadProduccion,
+cantidad,
+unidadDeMedida
+)
+VALUES (
+@tipoPronostico,
+@idProveedor,
+@idProducto,
+@idInsumo,
+@idActividadProduccion,
+@cantidad,
+@unidadDeMedida
+)
+END
+
+GO
+IF OBJECT_ID ( 'spUpdatePRONOSTICO', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spUpdatePRONOSTICO  
+GO
+CREATE PROCEDURE [spUpdatePRONOSTICO]
+@idPronostico int,
+@tipoPronostico varchar(max),
+@idProveedor int,
+@idProducto int,
+@idInsumo int,
+@idActividadProduccion int,
+@cantidad int,
+@unidadDeMedida varchar(max)
+AS
+BEGIN
+UPDATE
+PRONOSTICO
+SET
+tipoPronostico = @tipoPronostico,
+idProveedor = @idProveedor,
+idProducto = @idProducto,
+idInsumo = @idInsumo,
+idActividadProduccion = @idActividadProduccion,
+cantidad = @cantidad,
+unidadDeMedida = @unidadDeMedida
+WHERE
+idPronostico = @idPronostico
+END
+
+Go
+IF OBJECT_ID ( 'spGetCONTROLPRODUCCIONAll', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spGetCONTROLPRODUCCIONAll  
+GO
+CREATE PROCEDURE [spGetCONTROLPRODUCCIONAll]
+@idControlProduccion int = 0
+AS
+BEGIN
+SELECT *
+FROM
+CONTROLPRODUCCION
+where (idControlProduccion = @idControlProduccion or @idControlProduccion =0)
+END
+
+GO
+IF OBJECT_ID ( 'spInsertCONTROLPRODUCCION', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spInsertCONTROLPRODUCCION  
+GO
+CREATE PROCEDURE [spInsertCONTROLPRODUCCION]
+@idProducto int,
+@tipoPronostico varchar(max),
+@cantidadProducida int,
+@idActividadControlProduccion int,
+@indicador varchar(50)
+AS
+BEGIN
+INSERT INTO 
+CONTROLPRODUCCION(
+idProducto,
+tipoPronostico,
+fechaProduccion,
+cantidadProducida,
+idActividadControlProduccion,
+indicador
+)
+VALUES (
+@idProducto,
+@tipoPronostico,
+getdate(),
+@cantidadProducida,
+@idActividadControlProduccion,
+@indicador
+)
+END
+
+
+GO
+
+IF OBJECT_ID ( 'spUpdateCONTROLPRODUCCION', 'P' ) IS NOT NULL   
+    DROP PROCEDURE spUpdateCONTROLPRODUCCION  
+GO
+CREATE PROCEDURE [spUpdateCONTROLPRODUCCION]
+@idControlProduccion int,
+@idProducto int,
+@tipoPronostico varchar(max),
+@fechaProduccion datetime,
+@cantidadProducida int,
+@idActividadControlProduccion int,
+@indicador varchar(50)
+AS
+BEGIN
+UPDATE
+CONTROLPRODUCCION
+SET
+idProducto = @idProducto,
+tipoPronostico = @tipoPronostico,
+fechaProduccion = @fechaProduccion,
+cantidadProducida = @cantidadProducida,
+idActividadControlProduccion = @idActividadControlProduccion,
+indicador = @indicador
+WHERE
+idControlProduccion = @idControlProduccion
+END
 
 
 /*
@@ -1176,5 +1330,45 @@ INSERT INTO [dbo].[PERSONAL]
            ,2
            ,2)
 GO
+
+select * from PROVEEDOR
+insert MATERIA_PRIMA (vNombreMateriaPrima,vDescripcionMateriaPrima) values ('Maíz','')
+insert MATERIA_PRIMA (vNombreMateriaPrima,vDescripcionMateriaPrima) values ('batata','')
+insert MATERIA_PRIMA (vNombreMateriaPrima,vDescripcionMateriaPrima) values ('arroz','')
+insert MATERIA_PRIMA (vNombreMateriaPrima,vDescripcionMateriaPrima) values ('caña ','')
+insert MATERIA_PRIMA (vNombreMateriaPrima,vDescripcionMateriaPrima) values ('azúcar','')
+insert MATERIA_PRIMA (vNombreMateriaPrima,vDescripcionMateriaPrima) values ('lúpulo','')
+insert MATERIA_PRIMA (vNombreMateriaPrima,vDescripcionMateriaPrima) values ('Jarabe','')
+
+
+insert into PROVEEDOR (vNombreProveedor,vRUC) values ('Distribuidora IDELA','2015458755455')
+insert into PROVEEDOR (vNombreProveedor,vRUC) values ('Distribuidora MAYON','2014545548452')
+insert into PROVEEDOR (vNombreProveedor,vRUC) values ('Distribuidora PIRITA','2054552422447')
+insert into PROVEEDOR (vNombreProveedor,vRUC) values ('Distribuidora SODEIRA','2065654455545')
+
+
+insert into PROVEEDOR_MATERIAPRIMA (iIdProveedor,iIdMateriaPrima,dFechaEvaluacion) values (1,2,getdate())
+insert into PROVEEDOR_MATERIAPRIMA (iIdProveedor,iIdMateriaPrima,dFechaEvaluacion) values (1,3,getdate())
+insert into PROVEEDOR_MATERIAPRIMA (iIdProveedor,iIdMateriaPrima,dFechaEvaluacion) values (1,4,getdate())
+insert into PROVEEDOR_MATERIAPRIMA (iIdProveedor,iIdMateriaPrima,dFechaEvaluacion) values (2,1,getdate())
+insert into PROVEEDOR_MATERIAPRIMA (iIdProveedor,iIdMateriaPrima,dFechaEvaluacion) values (2,3,getdate())
+insert into PROVEEDOR_MATERIAPRIMA (iIdProveedor,iIdMateriaPrima,dFechaEvaluacion) values (2,4,getdate())
+insert into PROVEEDOR_MATERIAPRIMA (iIdProveedor,iIdMateriaPrima,dFechaEvaluacion) values (3,4,getdate())
+insert into PROVEEDOR_MATERIAPRIMA (iIdProveedor,iIdMateriaPrima,dFechaEvaluacion) values (3,3,getdate())
+insert into PROVEEDOR_MATERIAPRIMA (iIdProveedor,iIdMateriaPrima,dFechaEvaluacion) values (3,2,getdate())
+insert into PROVEEDOR_MATERIAPRIMA (iIdProveedor,iIdMateriaPrima,dFechaEvaluacion) values (4,4,getdate())
+insert into PROVEEDOR_MATERIAPRIMA (iIdProveedor,iIdMateriaPrima,dFechaEvaluacion) values (4,3,getdate())
+insert into PROVEEDOR_MATERIAPRIMA (iIdProveedor,iIdMateriaPrima,dFechaEvaluacion) values (4,1,getdate())
+
+insert into PROVEEDOR_MATERIAPRIMA (iIdProveedor,iIdMateriaPrima,dFechaEvaluacion) values (1,6,getdate())
+insert into PROVEEDOR_MATERIAPRIMA (iIdProveedor,iIdMateriaPrima,dFechaEvaluacion) values (1,5,getdate())
+insert into PROVEEDOR_MATERIAPRIMA (iIdProveedor,iIdMateriaPrima,dFechaEvaluacion) values (1,7,getdate())
+insert into PROVEEDOR_MATERIAPRIMA (iIdProveedor,iIdMateriaPrima,dFechaEvaluacion) values (2,6,getdate())
+insert into PROVEEDOR_MATERIAPRIMA (iIdProveedor,iIdMateriaPrima,dFechaEvaluacion) values (2,5,getdate())
+insert into PROVEEDOR_MATERIAPRIMA (iIdProveedor,iIdMateriaPrima,dFechaEvaluacion) values (3,7,getdate())
+insert into PROVEEDOR_MATERIAPRIMA (iIdProveedor,iIdMateriaPrima,dFechaEvaluacion) values (3,5,getdate())
+insert into PROVEEDOR_MATERIAPRIMA (iIdProveedor,iIdMateriaPrima,dFechaEvaluacion) values (4,7,getdate())
+insert into PROVEEDOR_MATERIAPRIMA (iIdProveedor,iIdMateriaPrima,dFechaEvaluacion) values (4,6,getdate())
+
 
 */

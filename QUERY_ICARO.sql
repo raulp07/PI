@@ -225,6 +225,9 @@ dFechaMod datetime
 
 go
 
+
+
+
 CREATE TABLE EVALUACIONPROVEEDORPREGUNTA
 (
 iIdEvaluacionProveedorPregunta int primary key identity,
@@ -281,10 +284,13 @@ go
 
 CREATE TABLE CONTROLPRODUCCION
 (
-idProducto int primary key identity,
+idControlProduccion int primary key identity,
+idProducto int ,
+tipoPronostico varchar(MAX),
 fechaProduccion datetime,
 cantidadProducida int,
 idActividadControlProduccion int,
+indicador varchar(50)
 )
 go
 

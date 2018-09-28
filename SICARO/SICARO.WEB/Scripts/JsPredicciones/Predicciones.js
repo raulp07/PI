@@ -2,7 +2,8 @@
 new Vue({
     el: "#app",
     data: {
-        Lista_Preguntas: [],
+        Lista_Materia_Prima: [],
+        Lista_Proveedor: [],
         Lista_Opciones: [],
         vCodCapacitacion: "",
         vTemaCapacitacion: "",
@@ -48,9 +49,68 @@ new Vue({
                 chart.draw(view, options);
             }
 
+            var jsonData = { iIdMateriaPrima: 0 };
+            axios.post("/Predicciones/ListaMateriaPrima/", jsonData).then(function (response) {
+                this.Lista_Materia_Prima = response.data.ListaMATERIA_PRIMA;
+            }.bind(this)).catch(function (error) {
+            });
+        },
+        ModificarConulta: function () {
 
-            axios.post("/TestEvaluacion/GenerarCamposCapacitacion/").then(function (response) {
+            var opcion = $('#Consulta').val();
 
+            if (opcion == 3) {
+                $('.divPrincipal').hide();
+                $('.divActividad').show();
+                
+            } else {
+                $('.divPrincipal').show();
+                $('.divActividad').hide();
+            }
+        },
+        ConsultarProveedor: function () {
+
+            var MP = $('#slProducto').val();
+            if (MP == 0) {
+                return;
+            }
+            var jsonData = { iUbigeo: MP };
+            axios.post("/Predicciones/ListaMateriaPrimaProveedor/", jsonData).then(function (response) {
+                this.Lista_Proveedor = response.data.ListaMATERIA_PRIMAProveedor;
+            }.bind(this)).catch(function (error) {
+            });
+        },
+        GuardarPrediccion: function () {
+
+
+            //@tipoPronostico varchar(max),
+            //@idProveedor int,
+            //@idProducto int,
+            //@idInsumo int,
+            //@idActividadProduccion int,
+            //@cantidad int,
+            //@unidadDeMedida varchar(max)
+
+            var param = {
+                tipoPronostico: $('#ddlPronostico').val(),
+                idProveedor: $('#slProveedor').val(),
+                idProducto: 0,// $('#').val(),
+                idInsumo: $('#slProducto').val(),
+                idActividadProduccion: $('#slActividad').val(),
+                cantidad: $('#cantidadproducida').val(),
+                unidadDeMedida: $('#slUnidadMedida').val(),
+            };
+
+            var MP = $('#slProducto').val();
+            if (MP == 0) {
+                return;
+            }
+            axios.post("/Predicciones/GuardarPronosticos/", param).then(function (response) {
+                debugger;
+                if (response.data.resultado > 0)
+                {
+                    alert('Registro Completo');
+                }
             }.bind(this)).catch(function (error) {
             });
         },

@@ -92,12 +92,15 @@
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="WCFICARO.svc" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConexionUtil.cs" />
     <Compile Include="Dominio\CAPACITACION_EL.cs" />
     <Compile Include="Dominio\CAPACITACION_PERSONAL_EL.cs" />
+    <Compile Include="Dominio\CONTROLPRODUCCION_EL.cs" />
     <Compile Include="Dominio\DETALLE_CAPACITACION_PERSONAL_EL.cs" />
     <Compile Include="Dominio\ElementosSaliente.cs" />
     <Compile Include="Dominio\EVALUACIONPROVEEDORPREGUNTA_EL.cs" />
@@ -108,6 +111,7 @@
     <Compile Include="Dominio\PERSONAL_EL.cs" />
     <Compile Include="Dominio\PREGUNTAS_CORRECTAS.cs" />
     <Compile Include="Dominio\PREGUNTA_EL.cs" />
+    <Compile Include="Dominio\PRONOSTICO_EL.cs" />
     <Compile Include="Dominio\PROVEEDOR_EL.cs" />
     <Compile Include="Dominio\question_less_success.cs" />
     <Compile Include="Dominio\question_more_success.cs" />
@@ -117,6 +121,7 @@
     <Compile Include="Dominio\UBIGEO_EL.cs" />
     <Compile Include="Persistencia\CAPACITACION_DA.cs" />
     <Compile Include="Persistencia\CAPACITACION_PERSONAL_DA.cs" />
+    <Compile Include="Persistencia\CONTROLPRODUCCION_DA.cs" />
     <Compile Include="Persistencia\DETALLE_CAPACITACION_PERSONAL_DA.cs" />
     <Compile Include="Persistencia\EVALUACIONPROVEEDORPREGUNTA_DA.cs" />
     <Compile Include="Persistencia\EVALUACION_PROVEEDOR_DA.cs" />
@@ -125,6 +130,7 @@
     <Compile Include="Persistencia\OPCION_PREGUNTA_DA.cs" />
     <Compile Include="Persistencia\PERSONAL_DA.cs" />
     <Compile Include="Persistencia\PREGUNTA_DA.cs" />
+    <Compile Include="Persistencia\PRONOSTICO_DA.cs" />
     <Compile Include="Persistencia\PROVEEDOR_DA.cs" />
     <Compile Include="Persistencia\REPRESENTANTE_DA.cs" />
     <Compile Include="Persistencia\TEST_DA.cs" />

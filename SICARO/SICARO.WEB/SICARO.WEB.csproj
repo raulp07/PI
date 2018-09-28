@@ -209,6 +209,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CAPACITACION_EL.cs" />
     <Compile Include="Models\CAPACITACION_PERSONAL_EL.cs" />
+    <Compile Include="Models\CONTROLPRODUCCION_EL.cs" />
     <Compile Include="Models\DETALLE_CAPACITACION_PERSONAL_EL.cs" />
     <Compile Include="Models\EVALUACIONPROVEEDORPREGUNTA_EL.cs" />
     <Compile Include="Models\EVALUACION_PROVEEDOR_EL.cs" />
@@ -219,6 +220,7 @@
     <Compile Include="Models\OPCION_PREGUNTA_EL.cs" />
     <Compile Include="Models\PERSONAL_EL.cs" />
     <Compile Include="Models\PREGUNTA_EL.cs" />
+    <Compile Include="Models\PRONOSTICO_EL.cs" />
     <Compile Include="Models\PROVEEDOR_EL.cs" />
     <Compile Include="Models\REPRESENTANTE_EL.cs" />
     <Compile Include="Models\TEST_EL.cs" />
@@ -301,6 +303,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Resporte\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
