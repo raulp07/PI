@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DALC4NET">
+      <HintPath>..\..\..\..\..\..\Desarrollo\netvue\DALC4NET.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -77,6 +80,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -201,7 +205,9 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PrediccionesController.cs" />
     <Compile Include="Controllers\PronosticoController.cs" />
+    <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Controllers\TestEvaluacionController.cs" />
+    <Compile Include="Controllers\TestRespuestaController.cs" />
     <Compile Include="Controllers\Utilitario.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -226,6 +232,18 @@
     <Compile Include="Models\TEST_EL.cs" />
     <Compile Include="Models\UBIGEO_EL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reporte\ReporteActa.aspx.cs">
+      <DependentUpon>ReporteActa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reporte\ReporteActa.aspx.designer.cs">
+      <DependentUpon>ReporteActa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RPTDataSet\datosreporte.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>datosreporte.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +253,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Reporte\ReporteActa.aspx" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -243,6 +262,17 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\PublishProfiles\WEB.pubxml" />
+    <Content Include="RPTDataSet\datosreporte.xsc">
+      <DependentUpon>datosreporte.xsd</DependentUpon>
+    </Content>
+    <None Include="RPTDataSet\datosreporte.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>datosreporte.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="RPTDataSet\datosreporte.xss">
+      <DependentUpon>datosreporte.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -255,6 +285,7 @@
     <Content Include="Scripts\JsPredicciones\Predicciones.js" />
     <Content Include="Scripts\JsPronostico\Pronostico.js" />
     <Content Include="Scripts\JsTestEvaluacion\TestEvaluacion.js" />
+    <Content Include="Scripts\JsTestRespuesta\TestRespuesta.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -300,10 +331,11 @@
     <Content Include="Views\TestEvaluacion\Index.cshtml" />
     <Content Include="Views\Predicciones\Index.cshtml" />
     <Content Include="Views\Pronostico\Index.cshtml" />
+    <Content Include="Views\TestRespuesta\Index.cshtml" />
+    <Content Include="Views\Reporte\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Resporte\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -312,6 +344,9 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reporte\rptActa.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

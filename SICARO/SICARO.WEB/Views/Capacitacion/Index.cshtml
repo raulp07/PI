@@ -8,7 +8,7 @@
 
     <div id="CAPACITACION">
         <div class="col-sm-12">
-            <h1 class="text-center">Menu Capacitación</h1>
+            <h1 class="text-center">Menú Capacitaciones</h1>
 
         </div>
         <div class="col-lg-12">
@@ -27,7 +27,13 @@
                         <td>{{ lista.vCodCapacitacion }}</td>
                         <td>{{ lista.vTemaCapacitacion }}</td>
                         <td>{{ lista.dFechaPropuestaCapacitacion}}</td>
-                        <td>{{ lista.iEstadoCapactiacion }}</td>
+                        <td>
+                            <div v-if="lista.iEstadoCapactiacion == 2">
+                                Creado
+                            </div>
+                            <div v-else>
+                                Finalizado
+                            </div>
                         <td>
                             <input type="button" value="Gestionar" v-on:click="GestionarCapacitacion(lista.iIdCapacitacion,lista.vCodCapacitacion,lista.vTemaCapacitacion)" class="btn btn-default" />
                         </td>
@@ -43,7 +49,7 @@
     <div id="GESTIONCAPACITACION" class="hide">
 
         <div class="row">
-            <h1 class="text-center">Getión de Capactiacion {{ vCodCapacitacion }}</h1>
+            <h1 class="text-center">Gestión de Capacitación {{ vCodCapacitacion }}</h1>
         </div>
         <div class="row">
             <label class="col-sm-4 control-label">Tema</label>
@@ -86,8 +92,8 @@
 
             <label class="col-sm-4">Expositor </label>
             <div class="text-center col-sm-8">
-                <label class="radio-inline"><input type="radio" v-on:click="MostrarPersonal" name="optradio">Interno</label>
-                <label class="radio-inline"><input type="radio" name="optradio">Externo</label>
+                <label class="radio-inline"><input type="radio" v-on:click="MostrarPersonal" name="optradio" value="0">Interno</label>
+                <label class="radio-inline"><input type="radio" v-on:click="MostrarPersonalExterno" name="optradio" value="1">Externo</label>
             </div>
         </div>
         <br />
@@ -189,7 +195,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="modal fade" id="ModalPersonal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -394,7 +400,7 @@
                         <button type="button" class="btn btn-default btncalcelartest" v-on:click="CancelarPreguntas()">Cancelar</button>
                     </div>
                     <div class="col-sm-4 col-sm-offset-1">
-                        <button type="button" class="btn btn-primary" v-on:click="GrabarPreguntas()">Gabar</button>
+                        <button type="button" class="btn btn-primary" v-on:click="GrabarPreguntas()">Grabar</button>
                     </div>
 
                 </div>
@@ -434,7 +440,7 @@
                                     <td class="col-sm-8">{{ lista.vNombrePersonal }} {{ lista.vApellidoPaternoPersonal }}</td>
                                     <td class="col-sm-2">{{ lista.iIdArea }}</td>
                                     <td class="col-sm-2">
-                                        <input type="checkbox" class="checkbox" disabled="disabled"/>
+                                        <input type="checkbox" class="checkbox" disabled="disabled" />
                                     </td>
                                 </tr>
                             </tbody>
@@ -446,7 +452,7 @@
                         <button type="button" class="btn btn-default cancelaroperarios" v-on:click="CancelarOperarios()">Cancelar</button>
                     </div>
                     <div class="col-sm-4 col-sm-offset-1">
-                        <button type="button" class="btn btn-primary" v-on:click="GrabarOperarios()">Gabar</button>
+                        <button type="button" class="btn btn-primary" v-on:click="GrabarOperarios()">Grabar</button>
                     </div>
 
                 </div>
@@ -455,7 +461,109 @@
         </div>
     </div>
 
-    <!-- Operarios -->
+    <!-- Expositor Externo -->
+    <div id="ModalEmpresaExterna" class="modal fade" role="dialog">
+        <div class="modal-dialog ">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Expositor Externo</h4>
+                </div>
+
+                <div class="modal-body">
+                    <h3>Empresa</h3>
+                    <div class="row">
+                        <label for="" class="col-sm-4 control-label">Empresa :</label>
+                        <div class="col-sm-8">
+                            <div class="col-sm-12">
+                                <input class="form-control" id="txtEmpresa" type="text" value="" v-model="EmpresaE">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <label for="" class="col-sm-4 control-label">RUC :</label>
+                        <div class="col-sm-8">
+                            <div class="col-sm-12">
+                                <input class="form-control" id="txtRUC" type="text" value="" v-model="RUCE">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <label for="" class="col-sm-4 control-label">Telefono :</label>
+                        <div class="col-sm-8">
+                            <div class="col-sm-12">
+                                <input class="form-control" id="txtTelefono" type="text" value="" v-model="TelefonoE">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <h3>Expositor</h3>
+                    <div class="row">
+                        <label for="" class="col-sm-4 control-label">Nombre :</label>
+                        <div class="col-sm-8">
+                            <div class="col-sm-12">
+                                <input class="form-control" id="txtExpositorE" type="text" value="" v-model="NombreE">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <label for="" class="col-sm-4 control-label">Apellido Paterno :</label>
+                        <div class="col-sm-8">
+                            <div class="col-sm-12">
+                                <input class="form-control" id="txtApellidoPE" type="text" value="" v-model="ApellidoPE">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <label for="" class="col-sm-4 control-label">Apellido Materno :</label>
+                        <div class="col-sm-8">
+                            <div class="col-sm-12">
+                                <input class="form-control" id="txtApellidoME" type="text" value="" v-model="ApellidoME">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <label for="" class="col-sm-4 control-label">DNI/RUC :</label>
+                        <div class="col-sm-8">
+                            <div class="col-sm-12">
+                                <input class="form-control" id="txtDniRuc" type="text" value="" v-model="DNIE">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <label for="" class="col-sm-4 control-label">Celular :</label>
+                        <div class="col-sm-8">
+                            <div class="col-sm-12">
+                                <input class="form-control" id="txtCelular" type="text" value="" v-model="CelularE">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <div class="col-sm-4 col-sm-offset-1">
+                        <button type="button" class="btn btn-default cancelaroperarios" data-dismiss="modal">Cancelar</button>
+                    </div>
+                    <div class="col-sm-4 col-sm-offset-1">
+                        <button type="button" class="btn btn-primary" v-on:click="GrabarExpositorExterno()">Grabar</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Mapa -->
     <div id="ModalMapa" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg" style="width: 100%">
 
@@ -465,16 +573,16 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Operarios</h4>
                 </div>
-                
+
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-6">
                             <label class="">Latitud</label>
-                            <label id="Latitud" class="label-danger" ></label>
+                            <label id="Latitud" class="label-danger"></label>
                         </div>
                         <div class="col-sm-6">
                             <label class="">Latitud</label>
-                            <label id="Longitud" class="label-danger" ></label>
+                            <label id="Longitud" class="label-danger"></label>
                         </div>
                     </div>
                     <div class="row">
@@ -489,7 +597,7 @@
                         <button type="button" class="btn btn-default cancelaroperarios" data-dismiss="modal">Cancelar</button>
                     </div>
                     <div class="col-sm-4 col-sm-offset-1">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Gabar</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Grabar</button>
                     </div>
 
                 </div>

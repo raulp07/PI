@@ -140,3 +140,16 @@ D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB.Tests\bin\Debug\es\Microsoft.Owin.Host.
 D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB.Tests\obj\Debug\SICARO.WEB.Tests.csprojResolveAssemblyReference.cache
 D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB.Tests\obj\Debug\SICARO.WEB.Tests.dll
 D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB.Tests\obj\Debug\SICARO.WEB.Tests.pdb
+D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB.Tests\bin\Debug\Microsoft.ReportViewer.WebForms.dll
+D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB.Tests\bin\Debug\Microsoft.SqlServer.Types.dll
+D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB.Tests\bin\Debug\es\Microsoft.ReportViewer.WebForms.resources.dll
+D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB.Tests\bin\Debug\de\Microsoft.SqlServer.Types.resources.dll
+D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB.Tests\bin\Debug\es\Microsoft.SqlServer.Types.resources.dll
+D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB.Tests\bin\Debug\fr\Microsoft.SqlServer.Types.resources.dll
+D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB.Tests\bin\Debug\it\Microsoft.SqlServer.Types.resources.dll
+D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB.Tests\bin\Debug\ja\Microsoft.SqlServer.Types.resources.dll
+D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB.Tests\bin\Debug\ko\Microsoft.SqlServer.Types.resources.dll
+D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB.Tests\bin\Debug\pt\Microsoft.SqlServer.Types.resources.dll
+D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB.Tests\bin\Debug\ru\Microsoft.SqlServer.Types.resources.dll
+D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB.Tests\bin\Debug\zh-Hans\Microsoft.SqlServer.Types.resources.dll
+D:\UPC\X\PI2\FuentesPI\SICARO\SICARO.WEB.Tests\bin\Debug\zh-Hant\Microsoft.SqlServer.Types.resources.dll

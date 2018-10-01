@@ -1,0 +1,195 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@*@Html.Partial("ReporteActa")*@
+
+
+<div id="app">
+
+    <div id="CAPACITACION">
+        <div class="col-sm-12">
+            <h1 class="text-center">Reporte Acta Inspección Sanitaria </h1>
+
+        </div>
+
+        <h3>ACTIVIDAD CONTROL PRODUCCION</h3>
+        <div class="col-lg-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>Tiempo inicial</td>
+                        <td>Tiempo Final</td>
+                        <td>Tiempo total mezclado</td>
+                        <td>Tiempo total reposo</td>
+                        <td>Tiempo total filtrado</td>
+                        <td>Tiempo total llenado</td>
+                        <td>Tiempo total encajonado</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="lista in listAP">
+                        <td>{{ lista.Tiempoinicial }}</td>
+                        <td>{{ lista.TiempoFinal }}</td>
+                        <td>{{ lista.tiempototalmezclado}}</td>
+                        <td>{{ lista.tiempototalreposo}}</td>
+                        <td>{{ lista.tiempototalfiltrado}}</td>
+                        <td>{{ lista.tiempototalllenado}}</td>
+                        <td>{{ lista.tiempototalencajonado}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+         <br />
+        <h3>CONTROL PRODUCCION</h3>
+        <div class="col-lg-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>Producto</td>
+                        <td>Tipo Pronostico</td>
+                        <td>Indicador</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="lista in listrm">
+                        <td>{{ lista.vnombremateriaprima }}</td>
+                        <td>{{ lista.tipopronostico }}</td>
+                        <td>{{ lista.indicador}}</td>
+                        <td>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <br />
+        <h3>CAPACITACION</h3>
+        <div class="col-lg-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>Capacitación</td>
+                        <td>Tema</td>
+                        <td>Fecha</td>
+                        <td>Cantidad capacitados</td>
+                        <td>Aprobados</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="lista in listM">
+                        <td>{{ lista.vcodcapacitacion }}</td>
+                        <td>{{ lista.vtemacapacitacion }}</td>
+                        <td>{{ lista.dfechapropuestacapacitacion}}</td>
+                        <td>{{ lista.cantidadcapacitados}}</td>
+                        <td>{{ lista.cantidad}}</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <br />
+        <h3>PROVEEDOR</h3>
+        <div class="col-lg-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>Proveedor</td>
+                        <td>Producto</td>
+                        <td>Condiciones</td>
+                        <td>Puntaje</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="lista in listP">
+                        <td>{{ lista.vnombreproveedor }}</td>
+                        <td>{{ lista.vnombremateriaprima }}</td>
+                        <td>{{ lista.icondiciones}}</td>
+                        <td>{{ lista.puntaje}}</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="col-lg-12 text-center">
+            <input id="Guardar" type="button" class="btn" value="Guardar"  v-on:click="GuardarReporte()" />
+        </div>
+        </div>
+</div>
+
+
+@*<iframe id="iframeReport" style="height:500px;width:80%"></iframe>*@
+
+
+<script type="text/javascript">
+    new Vue({
+        el: "#app",
+        data: {
+            listAP:[],
+            listrm: [],
+            listM: [],
+            listP: [],
+        },
+        methods: {
+            CargarReporte: function () {
+
+                axios.post("/Reporte/GenerarReporte/").then(function (response) {
+                    
+                    this.listAP = response.data.listAP;
+                    this.listrm = response.data.listrm;
+                    this.listM = response.data.listM;
+                    this.listP = response.data.listP;
+                }.bind(this)).catch(function (error) {
+                    console.log(error);
+                });
+            },
+            GuardarReporte: function () {
+                alert("Se guardaron los resultados correctamente");
+            },
+        },
+        computed: {},
+        created: function () {
+            this.CargarReporte();
+        },
+        mounted: function () {
+        }
+    })
+</script>
+
+
+
+
+@*<script>
+    //$(document).ready(function () {
+
+    //});
+
+    function ReportValidationCheck() {
+        //debugger;
+        url = "../Reporte/ReporteActa.aspx";
+        var myframe = document.getElementById("iframeReport");
+        if (myframe !== null) {
+            if (myframe.src) {
+                myframe.src = url;
+            }
+            else if (myframe.contentWindow !== null && myframe.contentWindow.location !== null) {
+                myframe.contentWindow.location = url;
+            }
+            else {
+                myframe.setAttribute('src', url);
+            }
+        }
+    }
+
+    ReportValidationCheck();
+
+</script>*@
+
+
+

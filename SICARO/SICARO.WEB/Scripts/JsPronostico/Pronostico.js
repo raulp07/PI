@@ -87,13 +87,22 @@ new Vue({
         },
         ListaControlPoduccion: function () {
 
-            var MP = $('#slProducto').val();
-            if (MP == 0) {
-                return;
-            }
+            //var MP = $('#slProducto').val();
+            //if (MP == 0) {
+            //    return;
+            //}
             var jsonData = {};
             axios.post("/Pronostico/ListaControlProduccion/", jsonData).then(function (response) {
-                this.Lista_Control_Produccion = response.data.CONTROLPRODUCCION;
+                var datos = response.data.CONTROLPRODUCCION;
+                $.each(datos, function (key, val) {
+                    var date = new Date(parseInt(val.fechaProduccion.substr(6)));
+                    var dia = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                    var mes = date.getMonth() < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                    var anio = date.getFullYear();
+                    var fecha = mes + "/" + dia + "/" + anio;
+                    val.fechaProduccion = fecha;
+                });
+                this.Lista_Control_Produccion = datos;
             }.bind(this)).catch(function (error) {
             });
         },
@@ -118,8 +127,17 @@ new Vue({
             }.bind(this)).catch(function (error) {
             });
         },
+        ListarPronostico: function () {
+            axios.post("/Pronostico/GuardarControlProduccion/", param).then(function (response) {
+                if (response.data.resultado > 0) {
+                    alert('Registro Completo');
+                }
+            }.bind(this)).catch(function (error) {
+            });
+        },
 
     },
+
     computed: {},
     created: function () {
         this.EmpezarEvaluacion();

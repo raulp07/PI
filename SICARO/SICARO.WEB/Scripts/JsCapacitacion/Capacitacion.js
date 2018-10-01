@@ -1,8 +1,5 @@
 ﻿
 
-
-
-
 new Vue({
     el: "#app",
     data: {
@@ -24,13 +21,34 @@ new Vue({
         Estado_Almacenamiento_Operarios: 0,
         Estado_Ver_Test: 0,
         Latitud: 0,
-        Longitud:0,
+        Longitud: 0,
+        EmpresaE: '',
+        RUCE: '',
+        TelefonoE: '',
+        NombreE: '',
+        ApellidoPE: '',
+        ApellidoME: '',
+        DNIE: '',
+        CelularE: '',
     },
     methods: {
         ListaCapacitacion: function () {
 
             axios.post("/Capacitacion/ListaCapacitacion/").then(function (response) {
-                this.Lista_Capacitacion = response.data.ListaCAPACITACION;
+                var datos = response.data.ListaCAPACITACION;
+
+                $.each(datos, function (key, val) {
+
+                    var date = new Date(parseInt(val.dFechaPropuestaCapacitacion.substr(6)));
+                    var dia = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                    var mes = date.getMonth() < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                    var anio = date.getFullYear();
+                    var fecha = mes + "/" + dia + "/" + anio;
+
+                    val.dFechaPropuestaCapacitacion = fecha;
+                });
+
+                this.Lista_Capacitacion = datos;
             }.bind(this)).catch(function (error) {
             });
         },
@@ -51,7 +69,9 @@ new Vue({
         MostrarPersonal: function () {
             $("#ModalPersonal").modal('show');
         },
-
+        MostrarPersonalExterno: function () {
+            $("#ModalEmpresaExterna").modal('show');
+        },
         ExpositorSeleccionado: function (vCodPersonal, iIdPersonal) {
             this.vCodPersonal = vCodPersonal;
             this.iIdPersonal = iIdPersonal;
@@ -126,7 +146,7 @@ new Vue({
                 draggable: true
             });
             google.maps.event.addListener(marker, 'dragend', function (event) {
-                $('#Latitud').text( marker.getPosition().lat());
+                $('#Latitud').text(marker.getPosition().lat());
                 $('#Longitud').text(marker.getPosition().lng());
                 console.log(this.getPosition().toString());
             });
@@ -171,7 +191,10 @@ new Vue({
             var _ResTextOpcion = $('#ResTextOpcion').val().trim();
             var _chkEstadoCorrecto = $('#chkEstadoCorrecto').is(':checked') ? 'Correcto' : 'Incorrecto';
             var _estadovalor = $('#chkEstadoCorrecto').is(':checked') ? 1 : 0;
-
+            if (_ResTextOpcion.length == 0) {
+                alert('Debe ingresar una descripción para la respuesta');
+                return;
+            }
 
             var _Validar = datos.find(function (val) {
                 return (val.Respuesta == _ResTextOpcion && val.codpregunta == _codPregunta);
@@ -210,6 +233,10 @@ new Vue({
             var _chkEstadoCorrecto = $('#chkEstadoCorrectoMultiple').is(':checked') ? 'Correcto' : 'Incorrecto';
             var _estadovalor = $('#chkEstadoCorrectoMultiple').is(':checked') ? 1 : 0;
 
+            if (_ResTextOpcion.length == 0) {
+                alert('Debe ingresar una descripción para la respuesta');
+                return;
+            }
 
             var _Validar = datos.find(function (val) {
                 return (val.Respuesta == _ResTextOpcion && val.codpregunta == _codPregunta);
@@ -453,8 +480,17 @@ new Vue({
                 alert("La hora final es mayor a la hora de inicio");
                 return;
             }
+            if ($('#ExpNombre').val().trim() == '') {
+                alert("Ingrese un expositor");
+                return;
+            }
+
 
             this.ValidarCantidadPreguntas();
+
+            if ($('input[name="optRespuesta"]:checked').val() == 1) {
+                this.iIdCapacitacion = 1;
+            }
 
             var GestionCapacitacion = {
                 'iIdCapacitacion': this.iIdCapacitacion,
@@ -535,8 +571,14 @@ new Vue({
                 $('#tipoRespuestaVF').addClass('hide');
                 $('#tipoRespuestaOpciones').addClass('hide');
                 $('#tipoRespuestaOpcionesMultiple').removeClass('hide');
-
             }
+        },
+        GrabarExpositorExterno: function () {
+
+            $('#ExpNombre').val(this.NombreE);
+            $('#ExpoApePat').val(this.ApellidoPE);
+            $('#ExpoApeMat').val(this.ApellidoME);
+            $("#ModalEmpresaExterna").modal('hide');
         },
     },
     computed: {},
