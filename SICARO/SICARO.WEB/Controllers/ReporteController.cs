@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace SICARO.WEB.Controllers
 {
     public class ReporteController : Controller
     {
+        JavaScriptSerializer js = new JavaScriptSerializer();
         // GET: Reporte
         public ActionResult Index()
         {
@@ -20,6 +25,40 @@ namespace SICARO.WEB.Controllers
 
         public JsonResult GenerarReporte()
         {
+
+            TrazabilidadSample MP = new TrazabilidadSample();
+            MP.producto = 1;
+            MP.proveedor = 10;
+            MP.peso = 1;
+            MP.duracion = 0;
+            float longitud = 0;
+            string postdata = js.Serialize(MP);
+            Prediccion ListaMATERIA_PRIMA = new Prediccion();
+
+            try
+            {
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create("http://localhost:56225/Service1.svc/PREDICCION");
+                HttpWebResponse res = null;
+                StreamReader reader = null;
+                        byte[] data = Encoding.UTF8.GetBytes(postdata);
+                        req.Method = "POST";
+                        req.ContentLength = data.Length;
+                        req.ContentType = "application/json";
+                        var reqStream = req.GetRequestStream();
+                        reqStream.Write(data, 0, data.Length);
+                        res = (HttpWebResponse)req.GetResponse();
+                        reader = new StreamReader(res.GetResponseStream());
+                        //return reader.ReadToEnd();
+                ListaMATERIA_PRIMA = js.Deserialize<Prediccion>(reader.ReadToEnd());
+                longitud = ListaMATERIA_PRIMA.prediccion;
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentNullException(e.Message);
+            }
+
+            
+
             DataSet ds = new DataSet();
             using (SqlConnection con = new SqlConnection("Data Source='BDICAROV1.mssql.somee.com';Initial Catalog=BDICAROV1;user=sefiroth_SQLLogin_1;password=2llanx2cd9;"))
             {
@@ -57,7 +96,7 @@ namespace SICARO.WEB.Controllers
                 listrm.Add(r);
             }
 
-            
+
 
             List<reporteCAPACITACION> listM = new List<reporteCAPACITACION>();
             foreach (DataRow item in ds.Tables[2].Rows)
@@ -86,7 +125,7 @@ namespace SICARO.WEB.Controllers
 
 
 
-            return Json(new { listrm = listrm, listAP = listAP, listM = listM, listP = listP }, JsonRequestBehavior.AllowGet);
+            return Json(new { listrm = listrm, listAP = listAP, listM = listM, listP = listP, longitud = longitud }, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -131,5 +170,18 @@ namespace SICARO.WEB.Controllers
         public reporteACTIVIDADCONTROLPRODUCCION _reporteACTIVIDADCONTROLPRODUCCION { get; set; }
         public reporteCAPACITACION _reporteCAPACITACION { get; set; }
         public reportePROVEEDOR _reportePROVEEDOR { get; set; }
+    }
+    public class TrazabilidadSample
+    {
+        public float producto;
+        public float proveedor;
+        public float peso;
+        public float duracion;
+    }
+    public class Prediccion
+    {
+        public float prediccion { get; set; }
+        public string rms { get; set; }
+        public string Squared { get; set; }
     }
 }

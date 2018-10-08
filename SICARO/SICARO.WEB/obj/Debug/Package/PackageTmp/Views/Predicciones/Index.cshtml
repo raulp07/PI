@@ -1,0 +1,156 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<div id="app">
+    <br /><br />
+    <div class="row text-center">
+        <h2>PRONOSTICAR EVENTOS DE PRODUCCIÓN</h2>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-sm-5">
+                <label class="">Seleccione Pronostico:</label>
+            </div>
+            <div class="col-sm-5 form-group ">
+                <select class="form-control" id="ddlPronostico" v-on:change="ModificarConulta()">
+                    <option value="1">Pronosticar Duración de insumo pre-stock</option>
+                    <option value="2">Pronosticar tiempo de arribo de insumo</option>
+                    <option value="3">Pronosticar tiempo de actividades en producción</option>
+                    <option value="4">Pronosticar merma de insumo solicitado</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-sm-5">
+                <label class="">Producto:</label>
+            </div>
+            <div class="col-sm-5 form-group ">
+                
+                <select class="form-control" id="slProducto" v-on:change="ConsultarProveedor()">
+                    <option value="0">Seleccione</option>
+                    <option v-for="lista in Lista_Materia_Prima" v-bind:value="lista.iIdMateriaPrima" >{{lista.vNombreMateriaPrima}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row divPrincipal">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-sm-5">
+                <label class="">Proveedor:</label>
+            </div>
+            <div class="col-sm-5 form-group ">
+                <select class="form-control" id="slProveedor">
+                    <option value="0">Seleccione</option>
+                    <option v-for="lista in Lista_Proveedor" v-bind:value="lista.iIdProveedor">{{lista.vNombreProveedor}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row divPrincipal">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-sm-5">
+                <label class="">Unidad de Medida:</label>
+            </div>
+            <div class="col-sm-5 form-group ">
+                <select class="form-control" id="slUnidadMedida">
+                    <option>Seleccione</option>
+                    <option>Unidades</option>
+                    <option>Litros</option>
+                    <option>Kg</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row divPrincipal">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-sm-5">
+                <label id="lblunidadpeso" class="">Unidad de Peso:</label>
+            </div>
+            <div class="col-sm-5 form-group ">
+                <input type="text" id="unidadpeso" class="form-control" /> 
+            </div>
+        </div>
+    </div>
+    <div class="row divActividad hide">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-sm-5">
+                <label id="lblunidadpeso" class="">Cantidad Producida:</label>
+            </div>
+            <div class="col-sm-5 form-group ">
+                <input type="text" id="cantidadproducida" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div class="row divActividad hide">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-sm-5">
+                <label class="">Actividad:</label>
+            </div>
+            <div class="col-sm-5 form-group ">
+                <select class="form-control" id="slActividad">
+                    <option value="0">Seleccione</option>
+                    <option value="11">Pesado</option>
+                    <option value="12">Mezclado 1</option>
+                    <option value="13">Mezclado 2</option>
+                    <option value="14">Mezclado 3</option>
+                    <option value="15">Reposo</option>
+                    <option value="16">Filtrado</option>
+                    <option value="17">Llenado</option>
+                    <option value="18">Encajonado</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    
+
+    <br />
+    <br />
+
+    <div class="row">
+        <div class="col-sm-7 col-sm-offset-2 form-group">
+            <div class="col-sm-12 ">
+                <div class="col-sm-3 form-group">
+                    <label class="">Error Medio Cuadrático:</label>
+                </div>
+                <div class="col-sm-9 form-group">
+
+                    <input type="text" id="txtErrorC" class="form-control" />
+                </div>
+            </div>
+            <br /><br />
+            <div class="col-sm-12 text-center">
+                <div id="columnchart_values" style="width: 300px; height: 250px;"></div>
+            </div>
+        </div>
+        <div class="col-sm-3 form-group ">
+            <div class="row form-group">
+                <label>La Predicción es:</label>
+                <label></label>
+            </div>
+            <br /><br />
+            <div class="row">
+                <input type="button" class="btn" value="Gestionar Indicadores" />
+            </div>
+            <br />
+            <div class="row">
+                <input type="button" class="btn" value="Pronosticar" v-on:click="GuardarPrediccion" />
+            </div>
+            <br />
+            <div class="row">
+                <input type="button" class="btn" value="Salir" />
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>
+
+
+<script src="~/Scripts/JsPredicciones/Predicciones.js"></script>

@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="app">
+    <div id="PMuestra">
+        <div class="row text-center">
+
+            <label>Bienvenido Operador</label>
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="row text-center">
+            <input type="button" class="btn btn-primary btn-lg" v-on:click="EmpezarEvaluacion" value="Visualizar Test" />
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="row text-center">
+            <input type="button" class="btn btn-default" value="Salir" />
+        </div>
+    </div>
+    <div id="PTest" class="hide">
+        <div class="row text-center">
+            <h1>TEST DE EVALUACIÓN</h1>
+
+        </div>
+        @*<div class="row text-center">
+
+            <label class="" id="Horas">00</label>
+            <label class="" id="Minutos">:00</label>
+            <label class="" id="Segundos">:00</label>
+            <label class="" id="Centesimas">:00</label>
+        </div>*@
+        <div class="row text-center">
+            <h2>Bienvenido al test de Evaluación</h2>
+        </div>
+        <br /><br />
+        <div class="row">
+            <label>Por favor, responda las siguientes preguntas</label>
+        </div>
+        <br /><br />
+        <div class="row" id="PContenido">
+
+        </div>
+        <br /><br /><br /><br />
+        @*<div class="row text-center">
+            <input type="button" class="btn btn-primary btn-lg" v-on:click="GuardarRespuestas" value="Guardar y Cerrar" />
+        </div>*@
+    </div>
+    <div id="PFinal" class="hide text-center">
+        <h1><label class="label label-danger"> Examen Finalizado</label></h1>
+    </div>
+
+</div>
+
+<script src="~/Scripts/JsTestRespuesta/TestRespuesta.js"></script>
