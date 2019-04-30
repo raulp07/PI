@@ -16,7 +16,7 @@ new Vue({
         EmpezarEvaluacion: function () {
 
             axios.post("/TestEvaluacion/GenerarCamposCapacitacion/").then(function (response) {
-               
+                debugger;
                 this.Lista_Preguntas = response.data.ListaPregunta;
                 this.Lista_Opciones = response.data.ListaOpciones;
                 var _html = "";
