@@ -61,7 +61,6 @@ new Vue({
         GestionarCapacitacion: function (iIdCapacitacion, vCodCapacitacion, vTemaCapacitacion) {
             var f = new Date();
             var fa = f.getFullYear() + '-' + ('0' + (f.getMonth() + 1)).slice(-2) + '-' + ('0' + f.getDate()).slice(-2);
-            $('#dfecha').val(fa);
             this.iIdCapacitacion = iIdCapacitacion;
             this.vCodCapacitacion = vCodCapacitacion;
             this.vTemaCapacitacion = vTemaCapacitacion;
